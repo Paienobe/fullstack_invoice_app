@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import makeInvoiceId
 
 # Create your models here.
 
@@ -9,12 +10,18 @@ class Item(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=15)
     total = models.DecimalField(decimal_places=2, max_digits=15)
 
+    def __str__(self):
+        return self.name
+
 
 class Address(models.Model):
     street = models.CharField(max_length=256)
     city = models.CharField(max_length=128)
     post_code = models.CharField(max_length=20)
     country = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f"{self.street}, {self.city}"
 
 
 class Invoice(models.Model):
@@ -23,6 +30,8 @@ class Invoice(models.Model):
         "PENDING": "Pending",
         "DRAFT": "Draft",
     }
+    id = models.CharField(
+        max_length=6, default=makeInvoiceId(), primary_key=True)
     created_at = models.DateField(auto_now=True)
     payment_due = models.DateField()
     description = models.CharField(max_length=128)
@@ -36,3 +45,6 @@ class Invoice(models.Model):
         Address, on_delete=models.CASCADE, related_name="client_address")
     items = models.ManyToManyField(Item)
     total = models.DecimalField(decimal_places=2, max_digits=15)
+
+    def __str__(self):
+        return f"{self.client_name} Invoice"
