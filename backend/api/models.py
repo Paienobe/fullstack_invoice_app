@@ -30,8 +30,9 @@ class Invoice(models.Model):
     client_name = models.CharField(max_length=256)
     client_email = models.EmailField()
     status = models.CharField(max_length=7, choices=STATUS_CHOICES)
-    sender_address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    sender_address = models.ForeignKey(
+        Address, on_delete=models.CASCADE, related_name="sender_address")
     client_address = models.ForeignKey(
-        Address, on_delete=models.CASCADE, related_name="+")
+        Address, on_delete=models.CASCADE, related_name="client_address")
     items = models.ManyToManyField(Item)
     total = models.DecimalField(decimal_places=2, max_digits=15)
