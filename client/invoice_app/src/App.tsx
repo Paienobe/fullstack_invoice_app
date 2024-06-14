@@ -6,7 +6,7 @@ import Header from "./components/Layout/Header/Header";
 
 function App() {
   return (
-    <main className="bg-light_bg h-screen font-Spartan">
+    <main className="bg-light_bg text-text_color h-screen font-Spartan">
       <BrowserRouter>
         <Header />
         <Routes>

@@ -9,6 +9,7 @@ export default {
       colors: {
         purple: "#7c5dfa",
         light_bg: "#f8f8fb",
+        text_color: "#858bb2",
       },
     },
   },
