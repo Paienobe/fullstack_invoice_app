@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import makeInvoiceId
+from .utils import make_invoice_id
 
 # Create your models here.
 
@@ -31,7 +31,7 @@ class Invoice(models.Model):
         "DRAFT": "Draft",
     }
     id = models.CharField(
-        max_length=6, default=makeInvoiceId(), primary_key=True)
+        max_length=6, default=make_invoice_id(), primary_key=True)
     created_at = models.DateField(auto_now=True)
     payment_due = models.DateField()
     description = models.CharField(max_length=128)
