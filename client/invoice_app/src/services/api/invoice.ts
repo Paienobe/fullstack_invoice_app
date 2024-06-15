@@ -8,3 +8,12 @@ export const getAllInvoices = async () => {
     console.error(error);
   }
 };
+
+export const getSingleInvoice = async (invoice_id: string) => {
+  try {
+    const request = await invoiceInstance.get(`/${invoice_id}`);
+    return request.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
