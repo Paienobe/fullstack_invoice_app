@@ -5,6 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class InvoiceView(generics.ListCreateAPIView):
+class InvoiceListView(generics.ListCreateAPIView):
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
+
+
+class SingleInvoiceView(generics.RetrieveAPIView):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
