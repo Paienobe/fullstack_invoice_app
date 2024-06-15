@@ -1,4 +1,5 @@
 import { ButtonProps } from "./types";
+import clsx from "clsx";
 
 const Button = ({
   text,
@@ -9,9 +10,12 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`flex items-center justify-center gap-2 h-12 rounded-full 
-        ${icon ? "pl-2 pr-4" : "px-6"} bg-${bg_color} text-white`}
-      style={{ color: text_color }}
+      className={clsx(
+        `flex items-center justify-center font-medium gap-2 h-12 rounded-full 
+        ${icon ? "pl-2 pr-4" : "px-6"}`,
+        bg_color,
+        text_color
+      )}
       onClick={clickFunc}
     >
       {icon && (
