@@ -4,7 +4,7 @@ import { StatusBarProps } from "./types";
 
 const StatusBar = ({ status }: StatusBarProps) => {
   return (
-    <section className="h-[6.25rem] bg-white my-6 rounded-lg p-6 flex items-center justify-between">
+    <section className="h-[6.25rem] bg-white my-6 rounded-lg p-6 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-4 font-light">
         Status
         <StatusTile status={status} />

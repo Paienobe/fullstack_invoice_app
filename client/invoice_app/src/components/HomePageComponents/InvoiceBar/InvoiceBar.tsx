@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const InvoiceBar = ({ invoice }: InvoiceBarProps) => {
   return (
     <Link to={`/invoice/${invoice.id}`}>
-      <div className="h-[5.125rem] bg-white rounded-lg border-[1px] border-transparent hover:border-purple transition-colors duration-300 cursor-pointer py-4 px-6 grid grid-cols-custom items-center gap-8">
+      <div className="h-[5.125rem] bg-white rounded-lg border-[1px] border-transparent hover:border-purple transition-colors duration-300 cursor-pointer py-4 px-6 grid grid-cols-custom items-center gap-8 shadow-sm">
         <div>
           <p className="font-semibold text-text_dark">
             <span className="font-normal text-primary_text_color">#</span>

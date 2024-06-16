@@ -6,6 +6,7 @@ import { Invoice as InvoiceType } from "../../services/api_response_types/invoic
 import { ImSpinner9 } from "react-icons/im";
 import { getSingleInvoice } from "../../services/api/invoice";
 import { useParams } from "react-router-dom";
+import InvoiceBody from "../../components/InvoicePageComponents/InvoiceBody/InvoiceBody";
 
 const Invoice = () => {
   const { id } = useParams();
@@ -30,6 +31,7 @@ const Invoice = () => {
           <>
             <BackButton />
             <StatusBar status={invoice.status} />
+            <InvoiceBody invoice={invoice} />
           </>
         )}
 

@@ -8,7 +8,7 @@ import { GlobalContextProvider } from "./context/Global/GlobalContext";
 function App() {
   return (
     <GlobalContextProvider>
-      <main className="bg-light_bg text-primary_text_color h-screen font-Spartan">
+      <main className="bg-light_bg text-primary_text_color min-h-screen font-Spartan">
         <BrowserRouter>
           <Header />
           <Routes>
