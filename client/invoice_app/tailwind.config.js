@@ -16,6 +16,8 @@ export default {
         orange_yellow: "#ff8f00",
         light_orange_yellow: "#ff8f000d",
         gray: "#373b530d",
+        red: "#ec5757",
+        dark_blue: "#373b53",
       },
     },
   },
