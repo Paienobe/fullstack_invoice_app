@@ -1,8 +1,8 @@
 import { invoiceInstance } from "../../axios/instances";
 
-export const getAllInvoices = async () => {
+export const getAllInvoices = async (params: { status: string[] }) => {
   try {
-    const request = await invoiceInstance.get("/");
+    const request = await invoiceInstance.get("/", { params });
     return request.data;
   } catch (error) {
     console.error(error);

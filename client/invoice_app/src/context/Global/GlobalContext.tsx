@@ -13,7 +13,8 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   });
 
   useEffect(() => {
-    getAllInvoices().then((result) => {
+    const params = { status: ["PAID", "PENDING", "DRAFT"] };
+    getAllInvoices(params).then((result) => {
       setInvoices(result);
     });
   }, []);
