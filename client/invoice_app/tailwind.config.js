@@ -18,6 +18,7 @@ export default {
         gray: "#373b530d",
         red: "#ec5757",
         dark_blue: "#373b53",
+        lavender: "#dfe3fa",
       },
     },
   },
