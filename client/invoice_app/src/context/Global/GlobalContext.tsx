@@ -7,9 +7,9 @@ const GlobalContext = createContext({} as GlobalContextType);
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   const [invoices, setInvoices] = useState<InvoiceResponse | null>(null);
   const [chosenFilter, setChosenFilter] = useState<Filters>({
-    PAID: true,
-    PENDING: true,
     DRAFT: true,
+    PENDING: true,
+    PAID: true,
   });
 
   useEffect(() => {

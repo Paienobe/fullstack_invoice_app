@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import downIcon from "../../../assets/icon-arrow-down.svg";
 import check from "../../../assets/icon-check.svg";
 import { FilterOptionProps } from "./types";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
+import { getAllInvoices } from "../../../services/api/invoice";
 
 const StatusFilter = () => {
   const optionsRef = useRef(null);
@@ -37,7 +38,7 @@ const StatusFilter = () => {
 export default StatusFilter;
 
 const FilterOption = ({ text }: FilterOptionProps) => {
-  const { chosenFilter, setChosenFilter } = useGlobalContext();
+  const { chosenFilter, setChosenFilter, setInvoices } = useGlobalContext();
   const filterType = text.toUpperCase();
   const isSelected = chosenFilter[filterType];
   const updatedFilter = () => {
@@ -46,6 +47,26 @@ const FilterOption = ({ text }: FilterOptionProps) => {
       [filterType]: !isSelected,
     });
   };
+
+  useEffect(() => {
+    const validFilters = () => {
+      const booleanStatuses = Object.values(chosenFilter);
+      const filterTypes = Object.keys(chosenFilter);
+      const updatedFilters: string[] = [];
+      booleanStatuses.forEach((item, index) => {
+        if (item) {
+          updatedFilters.push(filterTypes[index]);
+        }
+      });
+      return updatedFilters;
+    };
+
+    const params = { status: validFilters() };
+    getAllInvoices(params).then((result) => {
+      setInvoices(result);
+    });
+  }, [chosenFilter]);
+
   return (
     <button
       className="flex items-center gap-4 my-2 text-text_dark  cursor-pointer group"

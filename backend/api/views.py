@@ -14,7 +14,7 @@ class InvoiceListView(generics.ListCreateAPIView):
         status_params = params_dict.get("status")
         filtered_invoices = Invoice.objects.none()
         if status_params is None:
-            return Invoice.objects.all()
+            return filtered_invoices
         for param in status_params:
             queryset = Invoice.objects.filter(status=param)
             filtered_invoices = filtered_invoices.union(queryset)
