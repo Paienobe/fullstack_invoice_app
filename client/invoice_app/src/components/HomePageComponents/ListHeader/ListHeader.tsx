@@ -1,6 +1,7 @@
 import Button from "../../UI/Button/Button";
 import plus from "../../../assets/icon-plus.svg";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
+import StatusFilter from "../StatusFilter/StatusFilter";
 
 const ListHeader = () => {
   const { invoices } = useGlobalContext();
@@ -11,7 +12,9 @@ const ListHeader = () => {
         <h1 className="text-[2rem] text-black font-semibold">Invoices</h1>
         <p>There are {invoiceCount || 0} total invoices</p>
       </div>
-      <div>
+      <div className="flex items-center gap-10">
+        <StatusFilter />
+
         <Button
           text="New Invoice"
           icon={plus}
