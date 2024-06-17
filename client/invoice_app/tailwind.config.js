@@ -19,6 +19,7 @@ export default {
         red: "#ec5757",
         dark_blue: "#373b53",
         lavender: "#dfe3fa",
+        light_border: "#ced4da",
       },
     },
   },

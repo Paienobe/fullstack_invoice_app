@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isDark] = useState(false);
   return (
-    <header className="w-[5.625rem] bg-dark_blue h-screen fixed rounded-tr-[1.25rem] rounded-br-[1.25rem] overflow-hidden flex flex-col justify-between">
+    <header className="w-[5.625rem] bg-dark_blue h-screen fixed rounded-tr-[1.25rem] rounded-br-[1.25rem] overflow-hidden flex flex-col justify-between z-20">
       <Link to="/">
         <div className="w-full h-[5.625rem] flex items-center justify-center bg-purple rounded-br-[1.25rem] relative overflow-hidden group">
           <img src={logo} className="z-10" alt="" />

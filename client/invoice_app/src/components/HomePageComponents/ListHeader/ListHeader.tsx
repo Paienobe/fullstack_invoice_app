@@ -9,7 +9,9 @@ const ListHeader = () => {
   return (
     <section className="flex item-center justify-between">
       <div>
-        <h1 className="text-[2rem] text-black font-semibold">Invoices</h1>
+        <h1 className="text-[2.5rem] tracking-wide text-black font-medium">
+          Invoices
+        </h1>
         <p>There are {invoiceCount || 0} total invoices</p>
       </div>
       <div className="flex items-center gap-10">
