@@ -1,89 +1,56 @@
-import { useGlobalContext } from "../../../context/Global/GlobalContext";
-import Button from "../../UI/Button/Button";
-import InputField from "../../UI/InputField/InputField";
-import DatePicker from "../DatePicker/DatePicker";
-import InvoiceItem from "../InvoiceItem/InvoiceItem";
-import TermsDropdown from "../TermsDropdown/TermsDropdown";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { FormData } from "./types";
+import { Address } from "../../../services/api_response_types/invoice";
+import SenderFieldset from "../SenderFieldset/SenderFieldset";
+import ClientFieldset from "../ClientFieldset/ClientFieldset";
+import ItemsFieldset from "../ItemsFieldset/ItemsFieldset";
+import ButtonsFieldset from "../ButtonsFieldset/ButtonsFieldset";
+import { InvoiceData } from "./classes";
 
 const InvoiceForm = () => {
-  const { setShowForm } = useGlobalContext();
+  const [formData, setFormData] = useState(new InvoiceData());
+
+  const updateFormData = (key: keyof FormData, value: string) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
+  const updateNestedFormData = (
+    outer_key: keyof FormData,
+    inner_key: keyof Address,
+    value: string
+  ) => {
+    setFormData({
+      ...formData,
+      [outer_key]: { ...(formData[outer_key] as Address), [inner_key]: value },
+    });
+  };
+
   return (
     <motion.div
+      key="invoice_form"
       initial={{ x: "-100%" }} // Initial position off-screen to the left
       animate={{ x: 0 }} // Final position on-screen
-      exit={{ opacity: 0 }} // Position when exiting off-screen to the left
-      transition={{ duration: 1 }}
+      exit={{ x: "-100%" }} // Position when exiting off-screen to the left
+      transition={{ duration: 0.3 }}
     >
       <form className="w-1/2 h-screen overflow-auto bg-white">
         <section className="ml-[5.625rem] p-12">
           <h1 className="text-[2.5rem] font-medium tracking-wide text-text_dark">
             New Invoice
           </h1>
-          <fieldset className="my-8 font-medium">
-            <legend className="text-purple mb-4">Bill From</legend>
-            <InputField label="Street Address" value="" />
-            <div className="grid grid-cols-3 gap-4">
-              <InputField label="City" value="" />
-              <InputField label="Post Code" value="" />
-              <InputField label="Country" value="" />
-            </div>
-          </fieldset>
 
-          <fieldset>
-            <legend className="text-purple mb-4">Bill To</legend>
-            <InputField label="Client's Name" value="" />
-            <InputField label="Client's Email" value="" />
-            <InputField label="Street Address" value="" />
-            <div className="grid grid-cols-3 gap-4 mt-4">
-              <InputField label="City" value="" />
-              <InputField label="Post Code" value="" />
-              <InputField label="Country" value="" />
-            </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <DatePicker />
-              <TermsDropdown />
-            </div>
-            <InputField label="Project Description" value="" />
-          </fieldset>
-
-          <fieldset>
-            <legend className="text-2xl mb-3">Item List</legend>
-            <InvoiceItem />
-
-            <div className="mt-2">
-              <Button
-                text="+ Add New Item"
-                bg_color="bg-secondary_light"
-                text_color="text-text_dark"
-                width="w-full"
-                clickFunc={() => {}}
-              />
-            </div>
-          </fieldset>
-
-          <div className=" flex items-center justify-between mt-8">
-            <Button
-              text="Discard"
-              bg_color="bg-secondary_light"
-              text_color="text-primary_text_color"
-              clickFunc={() => setShowForm(false)}
-            />
-            <div className="flex items-center gap-4">
-              <Button
-                text="Save as Draft"
-                bg_color="bg-secondary_light"
-                text_color="text-text_dark"
-                clickFunc={() => {}}
-              />
-              <Button
-                text="Save and Send"
-                bg_color="bg-purple"
-                text_color="text-white"
-                clickFunc={() => {}}
-              />
-            </div>
-          </div>
+          <SenderFieldset
+            formData={formData}
+            updateNestedFormData={updateNestedFormData}
+          />
+          <ClientFieldset
+            formData={formData}
+            updateFormData={updateFormData}
+            updateNestedFormData={updateNestedFormData}
+          />
+          <ItemsFieldset formData={formData} setFormData={setFormData} />
+          <ButtonsFieldset />
         </section>
       </form>
     </motion.div>

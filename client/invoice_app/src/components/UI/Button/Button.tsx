@@ -18,6 +18,7 @@ const Button = ({
         text_color,
         width
       )}
+      type="button"
       onClick={clickFunc}
     >
       {icon && (
