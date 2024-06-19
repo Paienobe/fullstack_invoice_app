@@ -8,6 +8,7 @@ const ClientFieldset = ({
   updateFormData,
   updateNestedFormData,
   updateDate,
+  updateTerms,
 }: ClientFieldsetProps) => {
   return (
     <fieldset>
@@ -54,7 +55,7 @@ const ClientFieldset = ({
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <DatePicker updateDate={updateDate} />
-        <TermsDropdown />
+        <TermsDropdown updateTerms={updateTerms} />
       </div>
       <InputField
         label="Project Description"

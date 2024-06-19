@@ -10,4 +10,5 @@ export type ClientFieldsetProps = {
     value: string
   ) => void;
   updateDate: (value: Date) => void;
+  updateTerms: (term: number) => void;
 };

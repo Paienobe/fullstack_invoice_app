@@ -30,6 +30,10 @@ const InvoiceForm = () => {
     setFormData({ ...formData, payment_due: value });
   };
 
+  const updateTerms = (term: number) => {
+    setFormData({ ...formData, payment_terms: term });
+  };
+
   return (
     <motion.div
       key="invoice_form"
@@ -53,6 +57,7 @@ const InvoiceForm = () => {
             updateFormData={updateFormData}
             updateNestedFormData={updateNestedFormData}
             updateDate={updateDate}
+            updateTerms={updateTerms}
           />
           <ItemsFieldset formData={formData} setFormData={setFormData} />
           <ButtonsFieldset />

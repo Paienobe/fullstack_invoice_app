@@ -14,6 +14,7 @@ const InputField = ({ label, value, type, onChangeFunc }: InputFieldProps) => {
         type={type ? type : "text"}
         value={value}
         onChange={onChangeFunc}
+        required
       />
     </div>
   );
