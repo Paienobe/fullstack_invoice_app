@@ -6,6 +6,7 @@ const Button = ({
   icon,
   bg_color,
   text_color,
+  width,
   clickFunc,
 }: ButtonProps) => {
   return (
@@ -14,7 +15,8 @@ const Button = ({
         `flex items-center justify-center font-medium gap-2 h-12 rounded-full 
         ${icon ? "pl-2 pr-4" : "px-6"}`,
         bg_color,
-        text_color
+        text_color,
+        width
       )}
       onClick={clickFunc}
     >

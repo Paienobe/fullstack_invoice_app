@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import StatusFilter from "../StatusFilter/StatusFilter";
 
 const ListHeader = () => {
-  const { invoices } = useGlobalContext();
+  const { invoices, setShowForm } = useGlobalContext();
   const invoiceCount = invoices?.count;
   return (
     <section className="flex item-center justify-between">
@@ -22,7 +22,7 @@ const ListHeader = () => {
           icon={plus}
           bg_color="bg-purple"
           text_color="text-white"
-          clickFunc={() => {}}
+          clickFunc={() => setShowForm(true)}
         />
       </div>
     </section>

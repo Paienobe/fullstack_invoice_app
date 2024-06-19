@@ -20,6 +20,7 @@ export default {
         dark_blue: "#373b53",
         lavender: "#dfe3fa",
         light_border: "#ced4da",
+        secondary_light: "#f9fafe",
       },
     },
   },
