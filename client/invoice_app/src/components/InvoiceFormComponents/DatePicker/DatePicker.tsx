@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { IoCalendarOutline } from "react-icons/io5";
+import { DatePickerProps } from "./types";
 
-const DatePicker = () => {
+const DatePicker = ({ updateDate }: DatePickerProps) => {
   const [showCalendar, setShowCalendar] = useState(false);
+  const [selected, setSelected] = useState<Date>();
+  const currentDate = new Date().toLocaleDateString().split("/").join("-");
+
+  const parseDate = (date: Date) => {
+    return date.toLocaleDateString().split("/").join("-");
+  };
+
+  useEffect(() => {
+    if (selected) {
+      const localeDate = parseDate(selected);
+      updateDate(localeDate as unknown as Date);
+      setShowCalendar(false);
+    }
+  }, [selected]);
+
   return (
     <div className="relative">
       <button
@@ -14,12 +30,12 @@ const DatePicker = () => {
           setShowCalendar(!showCalendar);
         }}
       >
-        17-06-2024
+        {selected ? parseDate(selected) : currentDate}
         <IoCalendarOutline />
       </button>
       {showCalendar && (
         <div className="bg-white shadow-md absolute top-[-23rem]">
-          <DayPicker mode="single" />
+          <DayPicker mode="single" selected={selected} onSelect={setSelected} />
         </div>
       )}
     </div>

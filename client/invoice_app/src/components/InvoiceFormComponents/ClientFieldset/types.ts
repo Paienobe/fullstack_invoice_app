@@ -9,4 +9,5 @@ export type ClientFieldsetProps = {
     inner_key: keyof Address,
     value: string
   ) => void;
+  updateDate: (value: Date) => void;
 };
