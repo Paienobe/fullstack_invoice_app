@@ -27,3 +27,12 @@ export const createInvoice = async (data: FormData) => {
     console.error(error);
   }
 };
+
+export const deleteInvoice = async (id: string) => {
+  try {
+    const request = await invoiceInstance.delete(`/${id}/delete`);
+    return request.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

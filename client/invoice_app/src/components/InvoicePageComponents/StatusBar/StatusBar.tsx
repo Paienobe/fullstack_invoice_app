@@ -2,7 +2,7 @@ import Button from "../../UI/Button/Button";
 import StatusTile from "../../UI/StatusTile/StatusTile";
 import { StatusBarProps } from "./types";
 
-const StatusBar = ({ status }: StatusBarProps) => {
+const StatusBar = ({ status, openModal }: StatusBarProps) => {
   return (
     <section className="h-[6.25rem] bg-white my-6 rounded-lg p-6 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-4 font-light">
@@ -21,7 +21,7 @@ const StatusBar = ({ status }: StatusBarProps) => {
           text="Delete"
           bg_color="bg-red"
           text_color="text-white"
-          clickFunc={() => {}}
+          clickFunc={openModal}
         />
         {(status == "PENDING" || status == "DRAFT") && (
           <Button
