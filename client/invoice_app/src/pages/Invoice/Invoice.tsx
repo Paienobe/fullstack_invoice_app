@@ -4,14 +4,36 @@ import StatusBar from "../../components/InvoicePageComponents/StatusBar/StatusBa
 import PageMainArea from "../../components/Layout/PageContainer/PageMainArea";
 import { Invoice as InvoiceType } from "../../services/api_response_types/invoice";
 import { ImSpinner9 } from "react-icons/im";
-import { getSingleInvoice } from "../../services/api/invoice";
-import { useParams } from "react-router-dom";
+import { deleteInvoice, getSingleInvoice } from "../../services/api/invoice";
+import { useNavigate, useParams } from "react-router-dom";
 import InvoiceBody from "../../components/InvoicePageComponents/InvoiceBody/InvoiceBody";
+import DeleteModal from "../../components/InvoicePageComponents/DeleteModal/DeleteModal";
+import { useGlobalContext } from "../../context/Global/GlobalContext";
 
 const Invoice = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
+  const { invoices, setInvoices } = useGlobalContext();
   const [invoice, setInvoice] = useState<InvoiceType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const deleteCurrentInvoice = () => {
+    if (id) {
+      deleteInvoice(id)
+        .then(() => {
+          if (invoices) {
+            const updatedInvoices = invoices.results.filter((invoice) => {
+              return invoice.id !== id;
+            });
+            setInvoices({ ...invoices, results: updatedInvoices });
+          }
+        })
+        .finally(() => navigate("/"));
+    }
+  };
+
+  const toggleModal = () => setShowDeleteModal(!showDeleteModal);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,8 +52,15 @@ const Invoice = () => {
         {invoice && (
           <>
             <BackButton />
-            <StatusBar status={invoice.status} />
+            <StatusBar status={invoice.status} openModal={toggleModal} />
             <InvoiceBody invoice={invoice} />
+            {showDeleteModal && (
+              <DeleteModal
+                id={id!}
+                closeModal={toggleModal}
+                deleteCurrentInvoice={deleteCurrentInvoice}
+              />
+            )}
           </>
         )}
 
