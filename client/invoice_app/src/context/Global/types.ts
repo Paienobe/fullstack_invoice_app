@@ -6,6 +6,8 @@ export type GlobalContextType = {
   setInvoices: React.Dispatch<React.SetStateAction<InvoiceResponse | null>>;
   chosenFilter: Filters;
   setChosenFilter: React.Dispatch<React.SetStateAction<Filters>>;
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type Filters = { [x: string]: boolean };

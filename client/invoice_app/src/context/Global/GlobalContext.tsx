@@ -11,6 +11,7 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
     PENDING: true,
     PAID: true,
   });
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const params = { status: ["PAID", "PENDING", "DRAFT"] };
@@ -21,7 +22,14 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
 
   return (
     <GlobalContext.Provider
-      value={{ invoices, setInvoices, chosenFilter, setChosenFilter }}
+      value={{
+        invoices,
+        setInvoices,
+        chosenFilter,
+        setChosenFilter,
+        showForm,
+        setShowForm,
+      }}
     >
       {children}
     </GlobalContext.Provider>
