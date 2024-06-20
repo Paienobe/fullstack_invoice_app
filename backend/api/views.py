@@ -24,3 +24,8 @@ class InvoiceListCreateView(generics.ListCreateAPIView):
 class SingleInvoiceView(generics.RetrieveAPIView):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
+
+
+class DeleteInvoiceView(generics.DestroyAPIView):
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
