@@ -16,10 +16,13 @@ export type FormContextType = {
   ) => void;
   updateDate: (value: Date) => void;
   updateTerms: (term: number) => void;
+  handleSubmit: () => void;
 };
 
-export interface FormData extends Omit<Invoice, "id" | "created_at" | "items"> {
+export interface FormData
+  extends Omit<Invoice, "id" | "created_at" | "items" | "total"> {
   items: NumericItem[];
+  total: number;
 }
 
 export interface NumericItem extends Omit<Item, "price" | "total"> {

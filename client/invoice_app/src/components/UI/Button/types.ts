@@ -4,5 +4,6 @@ export type ButtonProps = {
   bg_color: string;
   text_color: string;
   width?: string;
-  clickFunc: () => void;
+  type?: "button" | "submit" | "reset";
+  clickFunc?: () => void;
 };

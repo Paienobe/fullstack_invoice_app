@@ -7,6 +7,7 @@ const Button = ({
   bg_color,
   text_color,
   width,
+  type,
   clickFunc,
 }: ButtonProps) => {
   return (
@@ -18,7 +19,7 @@ const Button = ({
         text_color,
         width
       )}
-      type="button"
+      type={type ? type : "button"}
       onClick={clickFunc}
     >
       {icon && (

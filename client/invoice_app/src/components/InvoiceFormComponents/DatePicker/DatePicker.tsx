@@ -4,16 +4,13 @@ import "react-day-picker/dist/style.css";
 import { IoCalendarOutline } from "react-icons/io5";
 import { DatePickerProps } from "./types";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
+import { parseDate } from "../../../utils";
 
 const DatePicker = ({ updateDate }: DatePickerProps) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selected, setSelected] = useState<Date>();
-  const currentDate = new Date().toLocaleDateString().split("/").join("-");
+  const currentDate = parseDate(new Date());
   const calendarRef = useRef(null);
-
-  const parseDate = (date: Date) => {
-    return date.toLocaleDateString().split("/").join("-");
-  };
 
   useEffect(() => {
     if (selected) {

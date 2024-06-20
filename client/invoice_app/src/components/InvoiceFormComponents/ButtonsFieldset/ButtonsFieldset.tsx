@@ -22,7 +22,8 @@ const ButtonsFieldset = () => {
           text="Save and Send"
           bg_color="bg-purple"
           text_color="text-white"
-          clickFunc={() => {}}
+          type="submit"
+          // clickFunc={handleSubmit}
         />
       </div>
     </fieldset>

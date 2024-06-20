@@ -22,6 +22,7 @@ const ClientFieldset = () => {
       <InputField
         label="Client's Email"
         value={formData.client_email}
+        type="email"
         onChangeFunc={(e) => updateFormData("client_email", e.target.value)}
       />
       <InputField
@@ -60,7 +61,7 @@ const ClientFieldset = () => {
       </div>
       <InputField
         label="Project Description"
-        value=""
+        value={formData.description}
         onChangeFunc={(e) => updateFormData("description", e.target.value)}
       />
     </fieldset>
