@@ -11,11 +11,21 @@ const InvoiceItem = ({
 }: InvoiceItemProps) => {
   const { name, price, quantity, total } = item;
 
-  const updateItem = (key: keyof Item, value: string) => {
+  const updateItem = (key: keyof Item, value: string | number) => {
     const itemsList = formData.items.map((item, idx) => {
-      if (idx === index) {
-        return { ...item, [key]: value };
-      } else return item;
+      if (idx !== index) return item;
+
+      let total = 0;
+      if (key == "price") {
+        total = Number(value) * quantity;
+      } else if (key == "quantity") {
+        total = Number(value) * price;
+      }
+      return {
+        ...item,
+        [key]: value,
+        total: key == "price" || key == "quantity" ? total : item.total,
+      };
     });
     setFormData({ ...formData, items: itemsList });
   };
@@ -24,10 +34,10 @@ const InvoiceItem = ({
     const itemsList = formData.items.filter((_, idx) => {
       return index !== idx;
     });
-    if (itemsList.length == 1) {
+    if (formData.items.length == 1) {
       setFormData({
         ...formData,
-        items: [{ name: "", price: "", quantity: 0, total: "" }],
+        items: [{ name: "", price: 0, quantity: 0, total: 0 }],
       });
     } else {
       setFormData({ ...formData, items: itemsList });
@@ -48,15 +58,15 @@ const InvoiceItem = ({
           label="Qty."
           type="number"
           value={quantity > 0 ? quantity : ""}
-          onChangeFunc={(e) => updateItem("quantity", e.target.value)}
+          onChangeFunc={(e) => updateItem("quantity", Number(e.target.value))}
         />
       </div>
       <div className="col-span-3">
         <InputField
           label="Price"
           type="number"
-          value={Number(price) > 0 ? price : ""}
-          onChangeFunc={(e) => updateItem("price", e.target.value)}
+          value={price > 0 ? price : ""}
+          onChangeFunc={(e) => updateItem("price", Number(e.target.value))}
         />
       </div>
       <div className="col-span-3 mb-4">

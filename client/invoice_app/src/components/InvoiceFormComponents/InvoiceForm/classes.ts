@@ -1,9 +1,10 @@
-import { Address, Item } from "../../../services/api_response_types/invoice";
+import { NumericItem } from "../../../context/Form/types";
+import { Address } from "../../../services/api_response_types/invoice";
 
 export class InvoiceData {
   sender_address: Address;
   client_address: Address;
-  items: Item[];
+  items: NumericItem[];
   payment_due: Date;
   description: string;
   payment_terms: number;
@@ -15,7 +16,7 @@ export class InvoiceData {
   constructor() {
     this.sender_address = { city: "", country: "", post_code: "", street: "" };
     this.client_address = { city: "", country: "", post_code: "", street: "" };
-    this.items = [{ name: "", price: "", quantity: 0, total: "" }];
+    this.items = [{ name: "", price: 0, quantity: 0, total: 0 }];
     this.payment_due = new Date();
     this.description = "";
     this.payment_terms = 0;

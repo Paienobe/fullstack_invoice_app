@@ -1,10 +1,11 @@
-import { Item } from "../../../services/api_response_types/invoice";
+import { useFormContext } from "../../../context/Form/FormContext";
+import { NumericItem } from "../../../context/Form/types";
 import Button from "../../UI/Button/Button";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
-import { ItemsFieldsetProps } from "./types";
 
-const ItemsFieldset = ({ formData, setFormData }: ItemsFieldsetProps) => {
-  const newItem: Item = { name: "", price: "", quantity: 0, total: "" };
+const ItemsFieldset = () => {
+  const { formData, setFormData } = useFormContext();
+  const newItem: NumericItem = { name: "", price: 0, quantity: 0, total: 0 };
   const addNewItem = () => {
     setFormData({ ...formData, items: [...formData.items, newItem] });
   };

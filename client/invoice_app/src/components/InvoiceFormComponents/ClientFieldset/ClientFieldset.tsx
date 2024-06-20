@@ -1,15 +1,16 @@
 import InputField from "../../UI/InputField/InputField";
-import { ClientFieldsetProps } from "./types";
 import DatePicker from "../DatePicker/DatePicker";
 import TermsDropdown from "../TermsDropdown/TermsDropdown";
+import { useFormContext } from "../../../context/Form/FormContext";
 
-const ClientFieldset = ({
-  formData,
-  updateFormData,
-  updateNestedFormData,
-  updateDate,
-  updateTerms,
-}: ClientFieldsetProps) => {
+const ClientFieldset = () => {
+  const {
+    formData,
+    updateFormData,
+    updateNestedFormData,
+    updateDate,
+    updateTerms,
+  } = useFormContext();
   return (
     <fieldset>
       <legend className="text-purple mb-4">Bill To</legend>

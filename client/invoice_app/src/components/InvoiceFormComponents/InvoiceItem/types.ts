@@ -1,8 +1,7 @@
-import { Item } from "../../../services/api_response_types/invoice";
-import { FormData } from "../InvoiceForm/types";
+import { FormData, NumericItem } from "../../../context/Form/types";
 
 export type InvoiceItemProps = {
-  item: Item;
+  item: NumericItem;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   index: number;
