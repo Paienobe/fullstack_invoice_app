@@ -15,6 +15,7 @@ export type FormContextType = {
   updateDate: (value: Date) => void;
   updateTerms: (term: number) => void;
   handleSubmit: () => void;
+  handleEdit: () => void;
 };
 
 export interface FormData

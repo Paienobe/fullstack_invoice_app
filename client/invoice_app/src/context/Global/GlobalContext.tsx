@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Filters, GlobalContextProps, GlobalContextType } from "./types";
-import { InvoiceResponse } from "../../services/api_response_types/invoice";
+import {
+  Invoice,
+  InvoiceResponse,
+} from "../../services/api_response_types/invoice";
 import { getAllInvoices } from "../../services/api/invoice";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
 const GlobalContext = createContext({} as GlobalContextType);
@@ -15,6 +18,7 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState(new InvoiceData());
   const [isEditMode, setIsEditMode] = useState(false);
+  const [singleInvoice, setSingleInvoice] = useState<Invoice | null>(null);
 
   useEffect(() => {
     const params = { status: ["PAID", "PENDING", "DRAFT"] };
@@ -36,6 +40,8 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
         setFormData,
         isEditMode,
         setIsEditMode,
+        singleInvoice,
+        setSingleInvoice,
       }}
     >
       {children}

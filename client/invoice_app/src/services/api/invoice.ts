@@ -37,9 +37,9 @@ export const deleteInvoice = async (id: string) => {
   }
 };
 
-export const updateInvoice = async (id: string) => {
+export const updateInvoice = async (id: string, data: FormData) => {
   try {
-    const request = await invoiceInstance.put(`/${id}/edit`);
+    const request = await invoiceInstance.put(`/${id}/edit/`, data);
     return request.data;
   } catch (error) {
     console.error(error);

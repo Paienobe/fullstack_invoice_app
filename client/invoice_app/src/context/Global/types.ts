@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
-import { InvoiceResponse } from "../../services/api_response_types/invoice";
+import {
+  Invoice,
+  InvoiceResponse,
+} from "../../services/api_response_types/invoice";
 import { FormData } from "../Form/types";
 
 export type GlobalContextType = {
@@ -13,6 +16,8 @@ export type GlobalContextType = {
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   isEditMode: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  singleInvoice: Invoice | null;
+  setSingleInvoice: React.Dispatch<React.SetStateAction<Invoice | null>>;
 };
 
 export type Filters = { [x: string]: boolean };

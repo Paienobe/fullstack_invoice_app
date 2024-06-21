@@ -7,6 +7,7 @@ import {
   FormContextProvider,
   useFormContext,
 } from "../../../context/Form/FormContext";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const InvoiceForm = () => {
   return (
@@ -19,7 +20,9 @@ const InvoiceForm = () => {
 export default InvoiceForm;
 
 const Form = () => {
-  const { handleSubmit } = useFormContext();
+  const { isEditMode } = useGlobalContext();
+  const { handleSubmit, handleEdit } = useFormContext();
+
   return (
     <motion.div
       key="invoice_form"
@@ -32,7 +35,7 @@ const Form = () => {
         className="w-1/2 h-screen overflow-auto bg-white"
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
+          !isEditMode ? handleSubmit() : handleEdit();
         }}
       >
         <section className="ml-[5.625rem] p-12">
