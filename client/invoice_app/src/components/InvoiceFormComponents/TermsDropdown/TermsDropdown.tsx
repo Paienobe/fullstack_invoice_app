@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import downIcon from "../../../assets/icon-arrow-down.svg";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { TermsDropdownProps } from "./types";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const TermsDropdown = ({ updateTerms }: TermsDropdownProps) => {
+  const { formData } = useGlobalContext();
   const termOptions = [1, 7, 14, 30];
-  const [selectedTerm, setSelectedTerm] = useState(termOptions[0]);
+  const [selectedTerm, setSelectedTerm] = useState(formData.payment_terms);
   const [showList, setShowList] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -15,7 +17,7 @@ const TermsDropdown = ({ updateTerms }: TermsDropdownProps) => {
     <div className="relative">
       <button
         type="button"
-        className="clickable border h-[3.25rem] p-4 border-light_border rounded-md w-full flex items-center justify-between"
+        className="clickable border h-[3.25rem] p-4 border-light_border rounded-md w-full flex items-center justify-between text-text_dark"
         onClick={() => setShowList(!showList)}
       >
         Net {selectedTerm} day{selectedTerm > 1 ? "s" : ""}{" "}

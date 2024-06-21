@@ -5,11 +5,12 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { DatePickerProps } from "./types";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { parseDate } from "../../../utils";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const DatePicker = ({ updateDate }: DatePickerProps) => {
+  const { formData } = useGlobalContext();
   const [showCalendar, setShowCalendar] = useState(false);
   const [selected, setSelected] = useState<Date>();
-  const currentDate = parseDate(new Date());
   const calendarRef = useRef(null);
 
   useEffect(() => {
@@ -25,13 +26,13 @@ const DatePicker = ({ updateDate }: DatePickerProps) => {
   return (
     <div className="relative">
       <button
-        className="can_click h-[3.25rem] border border-light_border rounded-md w-full flex items-center justify-between p-4"
+        className="can_click h-[3.25rem] border border-light_border rounded-md w-full flex items-center justify-between p-4 text-text_dark"
         type="button"
         onClick={() => {
           setShowCalendar(!showCalendar);
         }}
       >
-        {selected ? parseDate(selected) : currentDate}
+        {formData.payment_due as unknown as string}
         <IoCalendarOutline className="can_click" />
       </button>
       {showCalendar && (

@@ -36,3 +36,12 @@ export const deleteInvoice = async (id: string) => {
     console.error(error);
   }
 };
+
+export const updateInvoice = async (id: string) => {
+  try {
+    const request = await invoiceInstance.put(`/${id}/edit`);
+    return request.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

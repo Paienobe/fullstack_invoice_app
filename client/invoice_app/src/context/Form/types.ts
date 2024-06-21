@@ -6,8 +6,6 @@ import {
 } from "../../services/api_response_types/invoice";
 
 export type FormContextType = {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   updateFormData: (key: keyof FormData, value: string) => void;
   updateNestedFormData: (
     outer_key: keyof FormData,

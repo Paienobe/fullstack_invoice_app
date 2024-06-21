@@ -52,7 +52,7 @@ const Invoice = () => {
         {invoice && (
           <>
             <BackButton />
-            <StatusBar status={invoice.status} openModal={toggleModal} />
+            <StatusBar invoice={invoice} openModal={toggleModal} />
             <InvoiceBody invoice={invoice} />
             {showDeleteModal && (
               <DeleteModal

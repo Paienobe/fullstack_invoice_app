@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { FormContextProps, FormContextType, FormData } from "./types";
-import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
 import { Address } from "../../services/api_response_types/invoice";
 import { createInvoice } from "../../services/api/invoice";
 import { useGlobalContext } from "../Global/GlobalContext";
@@ -8,8 +7,8 @@ import { useGlobalContext } from "../Global/GlobalContext";
 const FormContext = createContext({} as FormContextType);
 
 export const FormContextProvider = ({ children }: FormContextProps) => {
-  const { setShowForm, invoices, setInvoices } = useGlobalContext();
-  const [formData, setFormData] = useState(new InvoiceData());
+  const { setShowForm, invoices, setInvoices, formData, setFormData } =
+    useGlobalContext();
 
   useEffect(() => {
     let total = 0;
@@ -55,8 +54,6 @@ export const FormContextProvider = ({ children }: FormContextProps) => {
   return (
     <FormContext.Provider
       value={{
-        formData,
-        setFormData,
         updateFormData,
         updateNestedFormData,
         updateDate,

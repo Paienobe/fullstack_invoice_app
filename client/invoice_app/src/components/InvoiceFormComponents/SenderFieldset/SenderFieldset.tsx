@@ -1,8 +1,10 @@
 import { useFormContext } from "../../../context/Form/FormContext";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import InputField from "../../UI/InputField/InputField";
 
 const SenderFieldset = () => {
-  const { formData, updateNestedFormData } = useFormContext();
+  const { formData } = useGlobalContext();
+  const { updateNestedFormData } = useFormContext();
   return (
     <fieldset className="my-8 font-medium">
       <legend className="text-purple mb-4">Bill From</legend>

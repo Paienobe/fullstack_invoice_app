@@ -1,10 +1,10 @@
-import { useFormContext } from "../../../context/Form/FormContext";
 import { NumericItem } from "../../../context/Form/types";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import Button from "../../UI/Button/Button";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
 const ItemsFieldset = () => {
-  const { formData, setFormData } = useFormContext();
+  const { formData, setFormData } = useGlobalContext();
   const newItem: NumericItem = { name: "", price: 0, quantity: 0, total: 0 };
   const addNewItem = () => {
     setFormData({ ...formData, items: [...formData.items, newItem] });

@@ -1,13 +1,17 @@
+import { FormData } from "../../../context/Form/types";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import Button from "../../UI/Button/Button";
 import StatusTile from "../../UI/StatusTile/StatusTile";
 import { StatusBarProps } from "./types";
 
-const StatusBar = ({ status, openModal }: StatusBarProps) => {
+const StatusBar = ({ invoice, openModal }: StatusBarProps) => {
+  const { setShowForm, setFormData, setIsEditMode } = useGlobalContext();
+
   return (
     <section className="h-[6.25rem] bg-white my-6 rounded-lg p-6 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-4 font-light">
         Status
-        <StatusTile status={status} />
+        <StatusTile status={invoice.status} />
       </div>
 
       <div className="flex items-center gap-4">
@@ -15,7 +19,11 @@ const StatusBar = ({ status, openModal }: StatusBarProps) => {
           text="Edit"
           bg_color="bg-gray"
           text_color="text-text_dark"
-          clickFunc={() => {}}
+          clickFunc={() => {
+            setFormData(invoice as unknown as FormData);
+            setIsEditMode(true);
+            setShowForm(true);
+          }}
         />
         <Button
           text="Delete"

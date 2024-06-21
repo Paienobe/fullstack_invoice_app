@@ -9,7 +9,7 @@ const InputField = ({ label, value, type, onChangeFunc }: InputFieldProps) => {
       </label>
       <input
         className={clsx(
-          "block border h-[3.25rem] p-4 border-light_border rounded-md mt-1 w-full focus:outline-purple"
+          "block border h-[3.25rem] text-text_dark p-4 border-light_border rounded-md mt-1 w-full focus:outline-purple"
         )}
         type={type ? type : "text"}
         value={value}
