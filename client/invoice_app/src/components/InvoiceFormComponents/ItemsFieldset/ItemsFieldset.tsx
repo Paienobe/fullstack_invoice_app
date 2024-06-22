@@ -1,25 +1,25 @@
 import { NumericItem } from "../../../context/Form/types";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
+import { makeNewItem } from "../../../utils";
 import Button from "../../UI/Button/Button";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
 const ItemsFieldset = () => {
   const { formData, setFormData } = useGlobalContext();
-  const newItem: NumericItem = { name: "", price: 0, quantity: 0, total: 0 };
+  const newItem: NumericItem = makeNewItem();
   const addNewItem = () => {
     setFormData({ ...formData, items: [...formData.items, newItem] });
   };
   return (
     <fieldset>
       <legend className="text-2xl mb-3">Item List</legend>
-      {formData.items.map((item, index) => {
+      {formData.items.map((item) => {
         return (
           <InvoiceItem
-            key={index}
+            key={item.id}
             item={item}
             formData={formData}
             setFormData={setFormData}
-            index={index}
           />
         );
       })}

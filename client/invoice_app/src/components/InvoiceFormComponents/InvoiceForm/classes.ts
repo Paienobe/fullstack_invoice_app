@@ -1,6 +1,6 @@
 import { NumericItem } from "../../../context/Form/types";
 import { Address } from "../../../services/api_response_types/invoice";
-import { parseDate } from "../../../utils";
+import { makeNewItem, parseDate } from "../../../utils";
 
 export class InvoiceData {
   sender_address: Address;
@@ -15,9 +15,21 @@ export class InvoiceData {
   total: number;
 
   constructor() {
-    this.sender_address = { city: "", country: "", post_code: "", street: "" };
-    this.client_address = { city: "", country: "", post_code: "", street: "" };
-    this.items = [{ name: "", price: 0, quantity: 0, total: 0 }];
+    this.sender_address = {
+      id: new Date().getTime(),
+      city: "",
+      country: "",
+      post_code: "",
+      street: "",
+    };
+    this.client_address = {
+      id: new Date().getTime(),
+      city: "",
+      country: "",
+      post_code: "",
+      street: "",
+    };
+    this.items = [makeNewItem()];
     this.payment_due = parseDate(new Date()) as unknown as Date;
     this.description = "";
     this.payment_terms = 0;
