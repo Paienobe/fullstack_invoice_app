@@ -1,11 +1,23 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Filters, GlobalContextProps, GlobalContextType } from "./types";
 import {
+  Filters,
+  FormData,
+  GlobalContextProps,
+  GlobalContextType,
+} from "./types";
+import {
+  Address,
   Invoice,
   InvoiceResponse,
 } from "../../services/api_response_types/invoice";
-import { getAllInvoices } from "../../services/api/invoice";
+import {
+  createInvoice,
+  getAllInvoices,
+  updateInvoice,
+} from "../../services/api/invoice";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
+import { parseDataForNewInvoice } from "../../utils";
+import { toast } from "react-toastify";
 const GlobalContext = createContext({} as GlobalContextType);
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
@@ -27,6 +39,63 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
     });
   }, []);
 
+  useEffect(() => {
+    let total = 0;
+    formData.items.forEach((item) => {
+      total += Number(item.total);
+      total = Number(total.toFixed(2));
+    });
+    setFormData({ ...formData, total });
+  }, [formData.items]);
+
+  const updateFormData = (key: keyof FormData, value: string) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
+  const updateNestedFormData = (
+    outer_key: keyof FormData,
+    inner_key: keyof Address,
+    value: string
+  ) => {
+    setFormData({
+      ...formData,
+      [outer_key]: { ...(formData[outer_key] as Address), [inner_key]: value },
+    });
+  };
+
+  const updateDate = (value: Date) => {
+    setFormData({ ...formData, payment_due: value });
+  };
+
+  const updateTerms = (term: number) => {
+    setFormData({ ...formData, payment_terms: term });
+  };
+
+  const handleSubmit = () => {
+    createInvoice(parseDataForNewInvoice(formData))
+      .then((result) => {
+        if (invoices) {
+          setInvoices({ ...invoices, results: [...invoices.results, result] });
+        }
+      })
+      .finally(() => setShowForm(false));
+  };
+
+  const handleEdit = (updatedInvoice?: Invoice) => {
+    const data = !updatedInvoice ? formData : updatedInvoice;
+    updateInvoice((data as unknown as Invoice).id!, data)
+      .then(() => {
+        setSingleInvoice(data as unknown as Invoice);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      })
+      .finally(() => {
+        setFormData(new InvoiceData());
+        setShowForm(false);
+      });
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -42,6 +111,12 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
         setIsEditMode,
         singleInvoice,
         setSingleInvoice,
+        updateFormData,
+        updateNestedFormData,
+        updateDate,
+        updateTerms,
+        handleSubmit,
+        handleEdit,
       }}
     >
       {children}

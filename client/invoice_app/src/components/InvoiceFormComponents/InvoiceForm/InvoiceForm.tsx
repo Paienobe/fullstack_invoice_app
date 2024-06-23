@@ -3,26 +3,10 @@ import SenderFieldset from "../SenderFieldset/SenderFieldset";
 import ClientFieldset from "../ClientFieldset/ClientFieldset";
 import ItemsFieldset from "../ItemsFieldset/ItemsFieldset";
 import ButtonsFieldset from "../ButtonsFieldset/ButtonsFieldset";
-import {
-  FormContextProvider,
-  useFormContext,
-} from "../../../context/Form/FormContext";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const InvoiceForm = () => {
-  return (
-    <FormContextProvider>
-      <Form />
-    </FormContextProvider>
-  );
-};
-
-export default InvoiceForm;
-
-const Form = () => {
-  const { isEditMode } = useGlobalContext();
-  const { handleSubmit, handleEdit } = useFormContext();
-
+  const { isEditMode, handleSubmit, handleEdit } = useGlobalContext();
   return (
     <motion.div
       key="invoice_form"
@@ -52,3 +36,5 @@ const Form = () => {
     </motion.div>
   );
 };
+
+export default InvoiceForm;

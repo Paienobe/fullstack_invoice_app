@@ -2,9 +2,10 @@ import Button from "../../UI/Button/Button";
 import plus from "../../../assets/icon-plus.svg";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import StatusFilter from "../StatusFilter/StatusFilter";
+import { InvoiceData } from "../../InvoiceFormComponents/InvoiceForm/classes";
 
 const ListHeader = () => {
-  const { invoices, setShowForm } = useGlobalContext();
+  const { invoices, setShowForm, setFormData } = useGlobalContext();
   const invoiceCount = invoices?.count;
   return (
     <section className="flex item-center justify-between">
@@ -22,7 +23,10 @@ const ListHeader = () => {
           icon={plus}
           bg_color="bg-purple"
           text_color="text-white"
-          clickFunc={() => setShowForm(true)}
+          clickFunc={() => {
+            setShowForm(true);
+            setFormData(new InvoiceData());
+          }}
         />
       </div>
     </section>
