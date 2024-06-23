@@ -5,6 +5,7 @@ import { createInvoice, updateInvoice } from "../../services/api/invoice";
 import { useGlobalContext } from "../Global/GlobalContext";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
 import { parseDataForNewInvoice } from "../../utils";
+import { toast } from "react-toastify";
 
 const FormContext = createContext({} as FormContextType);
 
@@ -66,7 +67,7 @@ export const FormContextProvider = ({ children }: FormContextProps) => {
         setSingleInvoice(formData as unknown as Invoice);
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err.message);
       })
       .finally(() => {
         setFormData(new InvoiceData());
