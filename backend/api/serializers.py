@@ -46,7 +46,6 @@ class InvoiceSerializer(serializers.ModelSerializer):
             items_instances.append(item_instance)
 
         invoice.items.set(objs=items_instances)
-
         return invoice
 
     def update(self, instance, validated_data):

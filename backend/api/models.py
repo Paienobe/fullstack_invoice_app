@@ -1,10 +1,12 @@
 from django.db import models
 from .utils import make_invoice_id
+import uuid
 
 # Create your models here.
 
 
 class Item(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
     name = models.CharField(max_length=256)
     quantity = models.IntegerField()
     price = models.DecimalField(decimal_places=2, max_digits=15)
@@ -15,6 +17,7 @@ class Item(models.Model):
 
 
 class Address(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
     street = models.CharField(max_length=256)
     city = models.CharField(max_length=128)
     post_code = models.CharField(max_length=20)
@@ -31,7 +34,7 @@ class Invoice(models.Model):
         "DRAFT": "Draft",
     }
     id = models.CharField(
-        max_length=6, default=make_invoice_id(), primary_key=True)
+        max_length=6, default=make_invoice_id, primary_key=True)
     created_at = models.DateField(auto_now=True)
     payment_due = models.DateField()
     description = models.CharField(max_length=128)

@@ -4,6 +4,7 @@ import { Address, Invoice } from "../../services/api_response_types/invoice";
 import { createInvoice, updateInvoice } from "../../services/api/invoice";
 import { useGlobalContext } from "../Global/GlobalContext";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
+import { parseDataForNewInvoice } from "../../utils";
 
 const FormContext = createContext({} as FormContextType);
 
@@ -20,7 +21,8 @@ export const FormContextProvider = ({ children }: FormContextProps) => {
   useEffect(() => {
     let total = 0;
     formData.items.forEach((item) => {
-      total += item.total;
+      total += Number(item.total);
+      total = Number(total.toFixed(2));
     });
     setFormData({ ...formData, total });
   }, [formData.items]);
@@ -49,7 +51,7 @@ export const FormContextProvider = ({ children }: FormContextProps) => {
   };
 
   const handleSubmit = () => {
-    createInvoice(formData)
+    createInvoice(parseDataForNewInvoice(formData))
       .then((result) => {
         if (invoices) {
           setInvoices({ ...invoices, results: [...invoices.results, result] });
@@ -62,6 +64,9 @@ export const FormContextProvider = ({ children }: FormContextProps) => {
     updateInvoice((formData as unknown as Invoice).id!, formData)
       .then(() => {
         setSingleInvoice(formData as unknown as Invoice);
+      })
+      .catch((err) => {
+        alert(err);
       })
       .finally(() => {
         setFormData(new InvoiceData());

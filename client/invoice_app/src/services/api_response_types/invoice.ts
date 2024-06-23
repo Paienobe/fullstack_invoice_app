@@ -21,7 +21,7 @@ export interface Invoice {
 }
 
 export interface Address {
-  id: number;
+  id: string;
   street: string;
   city: string;
   post_code: string;
@@ -29,7 +29,7 @@ export interface Address {
 }
 
 export interface Item {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   price: string;

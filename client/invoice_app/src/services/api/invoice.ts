@@ -43,5 +43,6 @@ export const updateInvoice = async (id: string, data: FormData) => {
     return request.data;
   } catch (error) {
     console.error(error);
+    throw new Error("Something went wrong");
   }
 };
