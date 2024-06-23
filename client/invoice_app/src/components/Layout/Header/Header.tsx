@@ -2,11 +2,20 @@ import logo from "../../../assets/logo.svg";
 import user_image from "../../../assets/image-avatar.jpg";
 import sun from "../../../assets/icon-sun.svg";
 import moon from "../../../assets/icon-moon.svg";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const Header = () => {
+  const location = useLocation();
+  const { setIsEditMode, setShowForm } = useGlobalContext();
   const [isDark] = useState(false);
+
+  useEffect(() => {
+    setShowForm(false);
+    setIsEditMode(false);
+  }, [location.pathname]);
+
   return (
     <header className="w-[5.625rem] bg-dark_blue h-screen fixed rounded-tr-[1.25rem] rounded-br-[1.25rem] overflow-hidden flex flex-col justify-between z-20">
       <Link to="/">

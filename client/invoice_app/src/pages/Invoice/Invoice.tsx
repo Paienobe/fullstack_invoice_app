@@ -1,22 +1,35 @@
-import { useEffect, useState } from "react";
 import BackButton from "../../components/InvoicePageComponents/BackButton/BackButton";
 import StatusBar from "../../components/InvoicePageComponents/StatusBar/StatusBar";
 import PageMainArea from "../../components/Layout/PageContainer/PageMainArea";
-import { Invoice as InvoiceType } from "../../services/api_response_types/invoice";
 import { ImSpinner9 } from "react-icons/im";
-import { deleteInvoice, getSingleInvoice } from "../../services/api/invoice";
+import { deleteInvoice } from "../../services/api/invoice";
 import { useNavigate, useParams } from "react-router-dom";
 import InvoiceBody from "../../components/InvoicePageComponents/InvoiceBody/InvoiceBody";
 import DeleteModal from "../../components/InvoicePageComponents/DeleteModal/DeleteModal";
 import { useGlobalContext } from "../../context/Global/GlobalContext";
+import {
+  InvoicePageProvider,
+  useInvoicePageContext,
+} from "../../context/Invoice/InvoicePageContext";
 
 const Invoice = () => {
-  const navigate = useNavigate();
+  return (
+    <section>
+      <InvoicePageProvider>
+        <InvoicePageMain />
+      </InvoicePageProvider>
+    </section>
+  );
+};
+
+export default Invoice;
+
+const InvoicePageMain = () => {
   const { id } = useParams();
-  const { invoices, setInvoices } = useGlobalContext();
-  const [invoice, setInvoice] = useState<InvoiceType | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const navigate = useNavigate();
+  const { invoices, setInvoices, singleInvoice } = useGlobalContext();
+  const { showDeleteModal, setShowDeleteModal, isLoading } =
+    useInvoicePageContext();
 
   const deleteCurrentInvoice = () => {
     if (id) {
@@ -34,44 +47,28 @@ const Invoice = () => {
   };
 
   const toggleModal = () => setShowDeleteModal(!showDeleteModal);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getSingleInvoice(id!)
-      .then((result) => {
-        setInvoice(result);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [id]);
-
   return (
-    <section>
-      <PageMainArea>
-        {invoice && (
-          <>
-            <BackButton />
-            <StatusBar status={invoice.status} openModal={toggleModal} />
-            <InvoiceBody invoice={invoice} />
-            {showDeleteModal && (
-              <DeleteModal
-                id={id!}
-                closeModal={toggleModal}
-                deleteCurrentInvoice={deleteCurrentInvoice}
-              />
-            )}
-          </>
-        )}
+    <PageMainArea>
+      {singleInvoice && (
+        <>
+          <BackButton />
+          <StatusBar invoice={singleInvoice} openModal={toggleModal} />
+          <InvoiceBody invoice={singleInvoice} />
+          {showDeleteModal && (
+            <DeleteModal
+              id={id!}
+              closeModal={toggleModal}
+              deleteCurrentInvoice={deleteCurrentInvoice}
+            />
+          )}
+        </>
+      )}
 
-        {isLoading && (
-          <div className="text-purple h-[calc(100vh-6rem)] flex items-center justify-center animate-spin">
-            <ImSpinner9 size={40} />
-          </div>
-        )}
-      </PageMainArea>
-    </section>
+      {isLoading && (
+        <div className="text-purple h-[calc(100vh-6rem)] flex items-center justify-center animate-spin">
+          <ImSpinner9 size={40} />
+        </div>
+      )}
+    </PageMainArea>
   );
 };
-
-export default Invoice;

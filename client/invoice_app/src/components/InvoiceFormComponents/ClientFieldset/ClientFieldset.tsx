@@ -1,7 +1,7 @@
 import InputField from "../../UI/InputField/InputField";
 import DatePicker from "../DatePicker/DatePicker";
 import TermsDropdown from "../TermsDropdown/TermsDropdown";
-import { useFormContext } from "../../../context/Form/FormContext";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const ClientFieldset = () => {
   const {
@@ -10,7 +10,8 @@ const ClientFieldset = () => {
     updateNestedFormData,
     updateDate,
     updateTerms,
-  } = useFormContext();
+  } = useGlobalContext();
+
   return (
     <fieldset>
       <legend className="text-purple mb-4">Bill To</legend>

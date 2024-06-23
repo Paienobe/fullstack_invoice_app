@@ -36,3 +36,13 @@ export const deleteInvoice = async (id: string) => {
     console.error(error);
   }
 };
+
+export const updateInvoice = async (id: string, data: FormData) => {
+  try {
+    const request = await invoiceInstance.put(`/${id}/edit/`, data);
+    return request.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Something went wrong");
+  }
+};

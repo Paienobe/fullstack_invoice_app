@@ -3,23 +3,10 @@ import SenderFieldset from "../SenderFieldset/SenderFieldset";
 import ClientFieldset from "../ClientFieldset/ClientFieldset";
 import ItemsFieldset from "../ItemsFieldset/ItemsFieldset";
 import ButtonsFieldset from "../ButtonsFieldset/ButtonsFieldset";
-import {
-  FormContextProvider,
-  useFormContext,
-} from "../../../context/Form/FormContext";
+import { useGlobalContext } from "../../../context/Global/GlobalContext";
 
 const InvoiceForm = () => {
-  return (
-    <FormContextProvider>
-      <Form />
-    </FormContextProvider>
-  );
-};
-
-export default InvoiceForm;
-
-const Form = () => {
-  const { handleSubmit } = useFormContext();
+  const { isEditMode, handleSubmit, handleEdit } = useGlobalContext();
   return (
     <motion.div
       key="invoice_form"
@@ -32,7 +19,7 @@ const Form = () => {
         className="w-1/2 h-screen overflow-auto bg-white"
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
+          !isEditMode ? handleSubmit() : handleEdit();
         }}
       >
         <section className="ml-[5.625rem] p-12">
@@ -49,3 +36,5 @@ const Form = () => {
     </motion.div>
   );
 };
+
+export default InvoiceForm;

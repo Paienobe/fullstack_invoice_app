@@ -1,4 +1,6 @@
+import { Invoice } from "../../../services/api_response_types/invoice";
+
 export type StatusBarProps = {
-  status: string;
+  invoice: Invoice;
   openModal: () => void;
 };
