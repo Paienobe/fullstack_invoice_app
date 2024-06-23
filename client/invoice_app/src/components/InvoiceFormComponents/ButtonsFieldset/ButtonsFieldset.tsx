@@ -3,7 +3,7 @@ import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import { InvoiceData } from "../InvoiceForm/classes";
 
 const ButtonsFieldset = () => {
-  const { setShowForm, isEditMode, setIsEditMode, setFormData } =
+  const { setShowForm, isEditMode, setIsEditMode, setFormData, formData } =
     useGlobalContext();
 
   const discardForm = () => {
@@ -27,7 +27,10 @@ const ButtonsFieldset = () => {
               text="Save as Draft"
               bg_color="bg-secondary_light"
               text_color="text-text_dark"
-              clickFunc={() => {}}
+              type="submit"
+              clickFunc={() => {
+                setFormData({ ...formData, status: "DRAFT" });
+              }}
             />
             <Button
               text="Save and Send"
