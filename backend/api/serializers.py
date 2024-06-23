@@ -7,7 +7,7 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = "__all__"
         extra_kwargs = {
-            "id": {"read_only": False}
+            "id": {"read_only": False, "validators": []}
         }
 
 
@@ -16,7 +16,7 @@ class AddressSerializer(serializers.ModelSerializer):
         model = Address
         fields = "__all__"
         extra_kwargs = {
-            "id": {"read_only": False}
+            "id": {"read_only": False, "validators": []}
         }
 
 
