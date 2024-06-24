@@ -3,23 +3,27 @@ import plus from "../../../assets/icon-plus.svg";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import StatusFilter from "../StatusFilter/StatusFilter";
 import { InvoiceData } from "../../InvoiceFormComponents/InvoiceForm/classes";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 const ListHeader = () => {
   const { invoices, setShowForm, setFormData } = useGlobalContext();
   const invoiceCount = invoices?.count;
+  const isMobile = useIsMobile();
   return (
     <section className="flex item-center justify-between">
       <div>
-        <h1 className="text-[2.5rem] tracking-wide text-black font-medium">
+        <h1 className="text-[2.5rem] md:text-[1.125rem] tracking-wide text-black font-medium">
           Invoices
         </h1>
-        <p>There are {invoiceCount || 0} total invoices</p>
+        <p className="md:text-[0.875rem]">
+          There are {invoiceCount || 0} total invoices
+        </p>
       </div>
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-10 md:gap-4">
         <StatusFilter />
 
         <Button
-          text="New Invoice"
+          text={isMobile ? "New" : "New Invoice"}
           icon={plus}
           bg_color="bg-purple"
           text_color="text-white"
