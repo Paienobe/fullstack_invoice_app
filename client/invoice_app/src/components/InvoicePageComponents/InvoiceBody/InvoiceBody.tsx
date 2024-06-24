@@ -4,7 +4,7 @@ import { InvoiceBodyProps } from "./types";
 const InvoiceBody = ({ invoice }: InvoiceBodyProps) => {
   return (
     <section className="px-[2.5rem] py-[3rem] bg-white rounded-lg shadow-sm font-light">
-      <section className="grid grid-cols-4 text-[0.938rem] gap-y-4">
+      <section className="grid grid-cols-4 text-[0.938rem] gap-4">
         <div className="col-span-3">
           <p className="text-text_dark text-[1.25rem] font-medium leading-5">
             <span className="text-primary_text_color font-normal">#</span>
