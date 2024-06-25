@@ -8,13 +8,13 @@ const DeleteModal = ({
   deleteCurrentInvoice,
 }: DeleteModalProps) => {
   return (
-    <section className="flex items-center justify-center w-screen h-screen fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm">
+    <section className="flex items-center justify-center w-screen h-screen fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm z-10">
       <motion.div
         initial={{ y: "-50%" }}
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-white rounded-lg w-[30.25rem] p-8">
+        <div className="bg-white rounded-lg w-[30.25rem] mx-auto p-8 md:w-[90%]">
           <h1 className="text-3xl text-text_dark font-medium mb-4">
             Confirm Deletion
           </h1>

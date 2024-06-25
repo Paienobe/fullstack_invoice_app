@@ -11,6 +11,7 @@ import {
   InvoicePageProvider,
   useInvoicePageContext,
 } from "../../context/Invoice/InvoicePageContext";
+import InvoiceOptions from "../../components/InvoicePageComponents/InvoiceOptions/InvoiceOptions";
 
 const Invoice = () => {
   return (
@@ -61,6 +62,9 @@ const InvoicePageMain = () => {
               deleteCurrentInvoice={deleteCurrentInvoice}
             />
           )}
+          <div className="hidden md:block fixed bottom-0 bg-white w-screen left-0 right-0 p-4">
+            <InvoiceOptions invoice={singleInvoice} openModal={toggleModal} />
+          </div>
         </>
       )}
 

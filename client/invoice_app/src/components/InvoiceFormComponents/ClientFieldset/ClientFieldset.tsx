@@ -33,7 +33,7 @@ const ClientFieldset = () => {
           updateNestedFormData("client_address", "street", e.target.value)
         }
       />
-      <div className="grid grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-3 gap-4 mt-4 md:grid-cols-2">
         <InputField
           label="City"
           value={formData.client_address?.city}
@@ -50,18 +50,20 @@ const ClientFieldset = () => {
         />
         <InputField
           label="Country"
+          className="md:col-span-2 md:mb-8"
           value={formData.client_address?.country}
           onChangeFunc={(e) =>
             updateNestedFormData("client_address", "country", e.target.value)
           }
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-4 md:mb-8">
         <DatePicker updateDate={updateDate} />
         <TermsDropdown updateTerms={updateTerms} />
       </div>
       <InputField
         label="Project Description"
+        className="md:mb-8"
         value={formData.description}
         onChangeFunc={(e) => updateFormData("description", e.target.value)}
       />

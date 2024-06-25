@@ -41,15 +41,15 @@ const InvoiceItem = ({ item, formData, setFormData }: InvoiceItemProps) => {
   };
 
   return (
-    <div className="grid grid-cols-12 gap-4">
-      <div className="col-span-4">
+    <div className="grid grid-cols-12 gap-4 md:grid-cols-3">
+      <div className="col-span-4 md:col-span-3">
         <InputField
           label="Item Name"
           value={name}
           onChangeFunc={(e) => updateItem("name", e.target.value)}
         />
       </div>
-      <div className="col-span-2">
+      <div className="col-span-2 md:col-span-1">
         <InputField
           label="Qty."
           type="number"
@@ -57,7 +57,7 @@ const InvoiceItem = ({ item, formData, setFormData }: InvoiceItemProps) => {
           onChangeFunc={(e) => updateItem("quantity", Number(e.target.value))}
         />
       </div>
-      <div className="col-span-3">
+      <div className="col-span-3 md:col-span-1">
         <InputField
           label="Price"
           type="number"
@@ -65,7 +65,7 @@ const InvoiceItem = ({ item, formData, setFormData }: InvoiceItemProps) => {
           onChangeFunc={(e) => updateItem("price", Number(e.target.value))}
         />
       </div>
-      <div className="col-span-3 mb-4">
+      <div className="col-span-3 mb-4 md:col-span-1">
         <label className="font-light">Total</label>
         <div className="flex items-center justify-between h-[3.25rem]">
           £ {total}

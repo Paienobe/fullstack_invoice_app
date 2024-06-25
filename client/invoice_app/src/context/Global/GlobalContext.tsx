@@ -83,7 +83,7 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
 
   const handleEdit = (updatedInvoice?: Invoice) => {
     const data = !updatedInvoice ? formData : updatedInvoice;
-    updateInvoice((data as unknown as Invoice).id!, data)
+    updateInvoice((data as unknown as Invoice).id!, data as FormData)
       .then(() => {
         setSingleInvoice(data as unknown as Invoice);
       })

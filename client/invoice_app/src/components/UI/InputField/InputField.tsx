@@ -1,9 +1,15 @@
 import { InputFieldProps } from "./types";
 import clsx from "clsx";
 
-const InputField = ({ label, value, type, onChangeFunc }: InputFieldProps) => {
+const InputField = ({
+  label,
+  value,
+  type,
+  className,
+  onChangeFunc,
+}: InputFieldProps) => {
   return (
-    <div className="mb-4">
+    <div className={clsx("mb-4", className)}>
       <label className="font-light" htmlFor={label}>
         {label}
       </label>

@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { FormData, NumericItem } from "../context/Form/types";
+import { FormData, NumericItem } from "../context/Global/types";
 import { Address } from "../services/api_response_types/invoice";
 
 export const parseDate = (date: Date) => {

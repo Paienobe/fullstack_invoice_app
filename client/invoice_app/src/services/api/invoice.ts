@@ -1,5 +1,5 @@
 import { invoiceInstance } from "../../axios/instances";
-import { FormData } from "../../context/Form/types";
+import { FormData } from "../../context/Global/types";
 
 export const getAllInvoices = async (params: { status: string[] }) => {
   try {

@@ -16,14 +16,14 @@ const InvoiceForm = () => {
       transition={{ duration: 0.3 }}
     >
       <form
-        className="w-1/2 h-screen overflow-auto bg-white"
+        className="w-1/2 h-screen overflow-auto bg-white md:w-full"
         onSubmit={(e) => {
           e.preventDefault();
           !isEditMode ? handleSubmit() : handleEdit();
         }}
       >
-        <section className="ml-[5.625rem] p-12">
-          <h1 className="text-[2.5rem] font-medium tracking-wide text-text_dark">
+        <section className="ml-[5.625rem] p-12 md:ml-0 md:px-4 md:py-6 md:mt-[5.625rem]">
+          <h1 className="text-[2.5rem] font-medium tracking-wide text-text_dark md:text-[1.5rem]">
             New Invoice
           </h1>
 

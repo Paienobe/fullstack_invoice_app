@@ -1,4 +1,4 @@
-import { NumericItem } from "../../../context/Form/types";
+import { NumericItem } from "../../../context/Global/types";
 import { Address } from "../../../services/api_response_types/invoice";
 import { makeNewItem, parseDate } from "../../../utils";
 import { v4 as uuid } from "uuid";

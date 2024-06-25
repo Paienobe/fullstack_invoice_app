@@ -5,20 +5,22 @@ import { FilterOptionProps } from "./types";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import { getAllInvoices } from "../../../services/api/invoice";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 const StatusFilter = () => {
   const optionsRef = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
+  const isMobile = useIsMobile();
 
   useOutsideClick(optionsRef, setShowOptions, "clickable");
 
   return (
     <div className="relative">
       <button
-        className="flex items-center gap-2 clickable"
+        className="flex items-center gap-2 clickable md:text-[0.875rem]"
         onClick={() => setShowOptions(!showOptions)}
       >
-        Filter by status <img src={downIcon} alt="" />
+        {isMobile ? "Filter" : "Filter by status"} <img src={downIcon} alt="" />
       </button>
 
       {showOptions && (

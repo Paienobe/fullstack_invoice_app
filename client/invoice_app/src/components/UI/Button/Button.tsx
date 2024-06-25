@@ -8,6 +8,7 @@ const Button = ({
   text_color,
   width,
   type,
+  className,
   clickFunc,
 }: ButtonProps) => {
   return (
@@ -17,7 +18,8 @@ const Button = ({
         ${icon ? "pl-2 pr-4" : "px-6"}`,
         bg_color,
         text_color,
-        width
+        width,
+        className
       )}
       type={type ? type : "button"}
       onClick={clickFunc}

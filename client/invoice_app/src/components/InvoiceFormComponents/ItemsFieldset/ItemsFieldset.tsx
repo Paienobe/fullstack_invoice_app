@@ -1,5 +1,5 @@
-import { NumericItem } from "../../../context/Form/types";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
+import { NumericItem } from "../../../context/Global/types";
 import { makeNewItem } from "../../../utils";
 import Button from "../../UI/Button/Button";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
