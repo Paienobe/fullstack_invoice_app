@@ -12,7 +12,7 @@ const InvoiceBarsContainer = () => {
       })}
 
       {isEmpty && (
-        <div className="flex flex-col items-center justify-center w-1/3 mx-auto mt-12 text-center">
+        <div className="flex flex-col items-center justify-center w-1/3 md:w-[90%] mx-auto mt-12 text-center">
           <img src={emptyIllustration} alt="" className="mb-12" />
           <p className="text-text_dark text-xl font-semibold">
             There is nothing here
