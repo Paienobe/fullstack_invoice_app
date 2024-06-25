@@ -13,16 +13,16 @@ const ButtonsFieldset = () => {
   };
 
   return (
-    <fieldset className="flex items-center justify-between mt-8">
+    <fieldset className="flex items-center justify-between mt-8 md:text-xs">
       {!isEditMode ? (
-        <>
+        <div className="md:flex md:items-center md:gap-2">
           <Button
             text="Discard"
             bg_color="bg-secondary_light"
             text_color="text-primary_text_color"
             clickFunc={discardForm}
           />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 md:gap-2">
             <Button
               text="Save as Draft"
               bg_color="bg-secondary_light"
@@ -39,7 +39,7 @@ const ButtonsFieldset = () => {
               type="submit"
             />
           </div>
-        </>
+        </div>
       ) : (
         <div className="flex items-center gap-4 w-fit ml-auto">
           <Button

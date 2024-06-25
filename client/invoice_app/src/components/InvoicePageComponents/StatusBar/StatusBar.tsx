@@ -8,7 +8,7 @@ const StatusBar = ({ invoice, openModal }: StatusBarProps) => {
   const { setShowForm, setFormData, setIsEditMode, handleEdit } =
     useGlobalContext();
 
-  const gg = () => {
+  const updateStatus = () => {
     const newStatus = invoice.status == "DRAFT" ? "PENDING" : "PAID";
     const updatedData = { ...invoice, status: newStatus };
     handleEdit(updatedData);
@@ -16,12 +16,12 @@ const StatusBar = ({ invoice, openModal }: StatusBarProps) => {
 
   return (
     <section className="h-[6.25rem] bg-white my-6 rounded-lg p-6 flex items-center justify-between shadow-sm">
-      <div className="flex items-center gap-4 font-light">
+      <div className="flex items-center gap-4 font-light md:w-full md:justify-between">
         Status
         <StatusTile status={invoice.status} />
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 md:hidden">
         <Button
           text="Edit"
           bg_color="bg-gray"
@@ -45,7 +45,7 @@ const StatusBar = ({ invoice, openModal }: StatusBarProps) => {
             }
             bg_color="bg-purple"
             text_color="text-white"
-            clickFunc={gg}
+            clickFunc={updateStatus}
           />
         )}
       </div>

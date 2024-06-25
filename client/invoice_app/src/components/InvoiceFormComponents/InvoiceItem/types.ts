@@ -1,4 +1,4 @@
-import { FormData, NumericItem } from "../../../context/Form/types";
+import { FormData, NumericItem } from "../../../context/Global/types";
 
 export type InvoiceItemProps = {
   item: NumericItem;

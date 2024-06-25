@@ -15,7 +15,7 @@ const SenderFieldset = () => {
           updateNestedFormData("sender_address", "street", e.target.value)
         }
       />
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 md:grid-cols-2">
         <InputField
           label="City"
           value={formData.sender_address?.city}
@@ -33,6 +33,7 @@ const SenderFieldset = () => {
         <InputField
           label="Country"
           value={formData.sender_address?.country}
+          className="md:col-span-2"
           onChangeFunc={(e) =>
             updateNestedFormData("sender_address", "country", e.target.value)
           }
