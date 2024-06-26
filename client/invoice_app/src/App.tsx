@@ -7,6 +7,8 @@ import InvoiceFormParent from "./components/InvoiceFormComponents/InvoiceFormPar
 import { useGlobalContext } from "./context/Global/GlobalContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoginPage from "./pages/Login/LoginPage";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   const { showForm } = useGlobalContext();
@@ -18,6 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/invoice/:id" element={<Invoice />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

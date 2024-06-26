@@ -16,6 +16,10 @@ const Header = () => {
     setIsEditMode(false);
   }, [location.pathname]);
 
+  if (location.pathname == "/sign-up" || location.pathname == "/login") {
+    return null;
+  }
+
   return (
     <header className="w-[5.625rem] bg-dark_blue h-screen fixed rounded-tr-[1.25rem] rounded-br-[1.25rem] overflow-hidden flex flex-col lg:flex-row justify-between z-20 lg:top-0 lg:h-[5.625rem] lg:w-full lg:rounded-none">
       <Link to="/">
