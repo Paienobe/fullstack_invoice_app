@@ -1,8 +1,13 @@
 from rest_framework import generics
-from .models import Invoice
-from .serializers import InvoiceSerializer
-from rest_framework.response import Response
-from rest_framework import status
+from .models import Invoice, User
+from .serializers import InvoiceSerializer, UserSerializer
+from rest_framework.permissions import AllowAny
+
+
+class RegistrationView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 
 class InvoiceListCreateView(generics.ListCreateAPIView):
@@ -16,7 +21,8 @@ class InvoiceListCreateView(generics.ListCreateAPIView):
         if status_params is None:
             return filtered_invoices
         for param in status_params:
-            queryset = Invoice.objects.filter(status=param)
+            queryset = Invoice.objects.filter(
+                created_by=self.request.user, status=param)
             filtered_invoices = filtered_invoices.union(queryset)
         return filtered_invoices
 

@@ -95,6 +95,7 @@ class Invoice(models.Model):
         Address, on_delete=models.CASCADE, related_name="client_address")
     items = models.ManyToManyField(Item)
     total = models.DecimalField(decimal_places=2, max_digits=15)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.client_name} Invoice"

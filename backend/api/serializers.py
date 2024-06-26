@@ -1,5 +1,19 @@
 from rest_framework import serializers
-from .models import Item, Address, Invoice
+from .models import Item, Address, Invoice, User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["name", "email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -29,16 +43,21 @@ class InvoiceSerializer(serializers.ModelSerializer):
         model = Invoice
         fields = "__all__"
 
+    def __init__(self, *args, **kwargs):
+        super(InvoiceSerializer, self).__init__(*args, **kwargs)
+        self.fields.pop("created_by", None)
+
     def create(self, validated_data):
         sender_address = validated_data.pop("sender_address")
         client_address = validated_data.pop("client_address")
         items = validated_data.pop("items")
+        request = self.context.get("request")
 
         sender_address_instance = Address.objects.create(**sender_address)
         client_address_instance = Address.objects.create(**client_address)
 
         invoice = Invoice.objects.create(
-            client_address=client_address_instance, sender_address=sender_address_instance, **validated_data)
+            client_address=client_address_instance, sender_address=sender_address_instance, created_by=request.user, **validated_data)
 
         items_instances = []
         for item in items:
