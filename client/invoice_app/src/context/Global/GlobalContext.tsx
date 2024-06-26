@@ -4,6 +4,7 @@ import {
   FormData,
   GlobalContextProps,
   GlobalContextType,
+  LoginResponse,
 } from "./types";
 import {
   Address,
@@ -16,8 +17,15 @@ import {
   updateInvoice,
 } from "../../services/api/invoice";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
-import { parseDataForNewInvoice } from "../../utils";
+import {
+  getUserDataCookie,
+  parseDataForNewInvoice,
+  setUserDataCookie,
+  updateBearerToken,
+} from "../../utils";
 import { toast } from "react-toastify";
+import { invoiceInstance } from "../../axios/instances";
+
 const GlobalContext = createContext({} as GlobalContextType);
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
@@ -31,6 +39,16 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   const [formData, setFormData] = useState(new InvoiceData());
   const [isEditMode, setIsEditMode] = useState(false);
   const [singleInvoice, setSingleInvoice] = useState<Invoice | null>(null);
+  const [loginResponse, setLoginResponse] = useState<LoginResponse | null>(
+    getUserDataCookie("user-data")
+  );
+
+  useEffect(() => {
+    if (loginResponse) {
+      updateBearerToken(invoiceInstance, loginResponse.access);
+      setUserDataCookie("user-data", loginResponse);
+    }
+  }, [loginResponse]);
 
   useEffect(() => {
     const params = { status: ["PAID", "PENDING", "DRAFT"] };
@@ -117,6 +135,8 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
         updateTerms,
         handleSubmit,
         handleEdit,
+        loginResponse,
+        setLoginResponse,
       }}
     >
       {children}

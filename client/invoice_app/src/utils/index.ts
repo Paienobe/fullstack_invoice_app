@@ -1,6 +1,8 @@
 import { v4 as uuid } from "uuid";
-import { FormData, NumericItem } from "../context/Global/types";
+import { FormData, LoginResponse, NumericItem } from "../context/Global/types";
 import { Address } from "../services/api_response_types/invoice";
+import { AxiosInstance } from "axios";
+import Cookies from "js-cookie";
 
 export const parseDate = (date: Date) => {
   const year = date.getFullYear();
@@ -40,4 +42,20 @@ export const parseDataForNewInvoice = (data: FormData) => {
     sender_address: removeAddressId(data.sender_address),
     items: updatedItems,
   } as FormData;
+};
+
+export const updateBearerToken = (instance: AxiosInstance, token: string) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
+export const setUserDataCookie = (name: string, data: LoginResponse) => {
+  Cookies.set(name, JSON.stringify(data), { path: "/", expires: 1 });
+};
+
+export const getUserDataCookie = (name: string) => {
+  const storedCookie = Cookies.get(name);
+  if (storedCookie) {
+    return JSON.parse(storedCookie) as LoginResponse;
+  }
+  return null;
 };

@@ -23,7 +23,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
-        <ToastContainer />
+        <ToastContainer bodyClassName={"font-Spartan"} />
       </BrowserRouter>
     </main>
   );

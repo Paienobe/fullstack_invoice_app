@@ -7,3 +7,7 @@ export const invoiceInstance = axios.create({
   paramsSerializer: (params) =>
     QueryString.stringify(params, { arrayFormat: "repeat" }),
 });
+
+export const authInstance = axios.create({
+  baseURL: `${BASE_API}/auth`,
+});

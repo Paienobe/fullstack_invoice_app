@@ -29,6 +29,8 @@ export type GlobalContextType = {
   updateTerms: (term: number) => void;
   handleSubmit: () => void;
   handleEdit: (updatedInvoice?: Invoice) => void;
+  loginResponse: LoginResponse | null;
+  setLoginResponse: React.Dispatch<React.SetStateAction<LoginResponse | null>>;
 };
 
 export type Filters = { [x: string]: boolean };
@@ -47,3 +49,12 @@ export interface NumericItem extends Omit<Item, "price" | "total"> {
   price: number;
   total: number;
 }
+
+export type LoginResponse = {
+  access: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+  };
+};

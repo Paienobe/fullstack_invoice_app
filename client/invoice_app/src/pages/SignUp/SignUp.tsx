@@ -4,16 +4,33 @@ import Button from "../../components/UI/Button/Button";
 import AuthFormHeader from "../../components/AuthPageComponents/AuthFormHeader/AuthFormHeader";
 import { useState } from "react";
 import AuthFormFooter from "../../components/AuthPageComponents/AuthFormFooter/AuthFormFooter";
+import { RegisterData } from "./types";
+import { registerUser } from "../../services/api/auth";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [signupData, setSignUpData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const updateData = (key: keyof typeof signupData, value: string) => {
+  const updateData = (key: keyof RegisterData, value: string) => {
     setSignUpData({ ...signupData, [key]: value });
+  };
+
+  const handleSubmit = () => {
+    registerUser(signupData)
+      .then(() => {
+        toast.success("Registered successfully!");
+        navigate("/login");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   return (
@@ -22,6 +39,7 @@ const SignUp = () => {
         className="w-[45%] lg:w-[70%] md:w-[90%] p-8 rounded-lg bg-white mx-auto"
         onSubmit={(e) => {
           e.preventDefault();
+          handleSubmit();
         }}
       >
         <AuthFormHeader />
