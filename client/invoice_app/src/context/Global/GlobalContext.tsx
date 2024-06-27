@@ -39,19 +39,15 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [singleInvoice, setSingleInvoice] = useState<Invoice | null>(null);
   const [loginResponse, setLoginResponse] = useState<LoginResponse | null>(
-    getUserDataCookie("user-data")
+    getUserDataCookie("user_data")
   );
 
   useEffect(() => {
     if (!loginResponse || !loginResponse.access) {
       navigate("/login");
-    }
-  }, [loginResponse]);
-
-  useEffect(() => {
-    if (loginResponse) {
+    } else {
       updateBearerToken(invoiceInstance, loginResponse.access);
-      setUserDataCookie("user-data", loginResponse);
+      setUserDataCookie("user_data", loginResponse);
     }
   }, [loginResponse]);
 
@@ -66,12 +62,10 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
         .finally(() => {
           setTimeout(() => {
             handleRefresh();
-          }, 5000);
+          }, 1000 * 270 /*4.5 minutes*/);
         });
     };
-    // if (loginResponse) {
     handleRefresh();
-    // }
   }, []);
 
   useEffect(() => {

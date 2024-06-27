@@ -49,7 +49,7 @@ export const updateBearerToken = (instance: AxiosInstance, token: string) => {
 };
 
 export const setUserDataCookie = (name: string, data: LoginResponse) => {
-  Cookies.set(name, JSON.stringify(data), { path: "/", expires: 1 });
+  Cookies.set(name, JSON.stringify(data), { path: "/", expires: 7 });
 };
 
 export const getUserDataCookie = (name: string) => {
@@ -58,4 +58,11 @@ export const getUserDataCookie = (name: string) => {
     return JSON.parse(storedCookie) as LoginResponse;
   }
   return null;
+};
+
+export const logoutUser = (
+  setLoginResponse: React.Dispatch<React.SetStateAction<LoginResponse | null>>
+) => {
+  Cookies.remove("user_data", { path: "/" });
+  setLoginResponse(null);
 };

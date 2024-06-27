@@ -5,11 +5,14 @@ import moon from "../../../assets/icon-moon.svg";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
+import LogoutBtn from "../../UI/LogoutBtn/LogoutBtn";
+import { logoutUser } from "../../../utils";
 
 const Header = () => {
   const location = useLocation();
-  const { setIsEditMode, setShowForm } = useGlobalContext();
+  const { setIsEditMode, setShowForm, setLoginResponse } = useGlobalContext();
   const [isDark] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
     setShowForm(false);
@@ -19,6 +22,11 @@ const Header = () => {
   if (location.pathname == "/sign-up" || location.pathname == "/login") {
     return null;
   }
+
+  const logout = () => {
+    setShowLogout(false);
+    logoutUser(setLoginResponse);
+  };
 
   return (
     <header className="w-[5.625rem] bg-dark_blue h-screen fixed rounded-tr-[1.25rem] rounded-br-[1.25rem] overflow-hidden flex flex-col lg:flex-row justify-between z-20 lg:top-0 lg:h-[5.625rem] lg:w-full lg:rounded-none">
@@ -35,12 +43,14 @@ const Header = () => {
             <img src={isDark ? moon : sun} alt="" />
           </div>
         </div>
-        <div className="h-[4.5rem] lg:h-full flex items-center justify-center border-t-[1.5px] border-white border-opacity-20 lg:w-1/2 lg:border-t-transparent lg:border-l-[1.5px]">
+        <div className="h-[4.5rem] lg:h-full flex items-center justify-center border-t-[1.5px] border-white border-opacity-20 lg:w-1/2 lg:border-t-transparent lg:border-l-[1.5px] relative">
           <img
-            className="w-[2.5rem] h-[2.5rem] rounded-full"
+            className="w-[2.5rem] h-[2.5rem] rounded-full cursor-pointer"
             src={user_image}
             alt=""
+            onClick={() => setShowLogout(!showLogout)}
           />
+          {showLogout && <LogoutBtn logoutFunc={logout} />}
         </div>
       </div>
     </header>

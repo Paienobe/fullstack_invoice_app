@@ -54,7 +54,7 @@ const LoginPage = () => {
         />
         <Button
           bg_color="bg-purple"
-          text="Sign Up"
+          text="Log in"
           text_color="text-white"
           className="w-full mt-8"
           type="submit"
