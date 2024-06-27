@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -21,6 +22,9 @@ export default {
         lavender: "#dfe3fa",
         light_border: "#ced4da",
         secondary_light: "#f9fafe",
+        secondary_dark: "#1e2139",
+        dark_bg: "#141625",
+        light_purple: "#252945",
       },
     },
     screens: {

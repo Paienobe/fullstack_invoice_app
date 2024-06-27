@@ -14,8 +14,8 @@ const DeleteModal = ({
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="bg-white rounded-lg w-[30.25rem] mx-auto p-8 md:w-[90%]">
-          <h1 className="text-3xl text-text_dark font-medium mb-4">
+        <div className="bg-white dark:bg-dark_bg rounded-lg w-[30.25rem] mx-auto p-8 md:w-[90%]">
+          <h1 className="text-3xl text-text_dark dark:text-white font-medium mb-4">
             Confirm Deletion
           </h1>
           <p className="font-light leading-5">
@@ -26,8 +26,8 @@ const DeleteModal = ({
           <div className="flex items-center gap-4 mt-8 w-fit ml-auto">
             <Button
               text="Cancel"
-              bg_color="bg-gray"
-              text_color="text-text_dark"
+              bg_color="bg-gray dark:bg-light_purple"
+              text_color="text-text_dark dark:text-white"
               clickFunc={closeModal}
             />
             <Button

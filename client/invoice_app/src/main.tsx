@@ -4,12 +4,15 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalContextProvider } from "./context/Global/GlobalContext.tsx";
+import { ThemeContextProvider } from "./context/Theme/ThemeContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <GlobalContextProvider>
-        <App />
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
       </GlobalContextProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -12,7 +12,7 @@ const ListHeader = () => {
   return (
     <section className="flex item-center justify-between">
       <div>
-        <h1 className="text-[2.5rem] md:text-[1.125rem] tracking-wide text-black font-medium">
+        <h1 className="text-[2.5rem] md:text-[1.125rem] tracking-wide text-black dark:text-white font-medium">
           Invoices
         </h1>
         <p className="md:text-[0.875rem]">

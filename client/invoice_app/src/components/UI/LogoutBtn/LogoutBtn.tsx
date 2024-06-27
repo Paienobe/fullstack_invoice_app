@@ -16,7 +16,7 @@ const LogoutBtn = ({ logoutFunc }: LogoutBtnProps) => {
       className="absolute"
     >
       <button
-        className="p-2 bg-white bottom-16 rounded-lg hover:text-purple"
+        className="p-2 bg-white dark:bg-dark_bg bottom-16 rounded-lg hover:text-purple"
         onClick={logoutFunc}
       >
         Logout

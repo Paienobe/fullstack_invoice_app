@@ -16,8 +16,8 @@ const InvoiceOptions = ({ invoice, openModal }: InvoiceOptionsProps) => {
     <div className="flex items-center gap-4 md:w-fit md:ml-auto">
       <Button
         text="Edit"
-        bg_color="bg-gray"
-        text_color="text-text_dark"
+        bg_color="bg-gray dark:bg-light_purple"
+        text_color="text-text_dark dark:text-white"
         clickFunc={() => {
           setFormData(invoice as unknown as FormData);
           setIsEditMode(true);

@@ -13,7 +13,7 @@ import SignUp from "./pages/SignUp/SignUp";
 function App() {
   const { showForm } = useGlobalContext();
   return (
-    <main className="bg-light_bg text-primary_text_color min-h-screen font-Spartan">
+    <main className="bg-light_bg dark:bg-dark_bg text-primary_text_color min-h-screen font-Spartan">
       <Header />
       {showForm && <InvoiceFormParent />}
       <Routes>

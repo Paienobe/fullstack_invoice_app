@@ -27,8 +27,8 @@ const ItemsFieldset = () => {
       <div className="mt-2">
         <Button
           text="+ Add New Item"
-          bg_color="bg-secondary_light"
-          text_color="text-text_dark"
+          bg_color="bg-secondary_light dark:bg-secondary_dark"
+          text_color="text-text_dark dark:text-primary_text_color"
           width="w-full"
           clickFunc={addNewItem}
         />
