@@ -1,10 +1,20 @@
 import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import InvoiceBar from "../InvoiceBar/InvoiceBar";
 import emptyIllustration from "../../../assets/illustration-empty.svg";
+import { useEffect } from "react";
+import { getAllInvoices } from "../../../services/api/invoice";
 
 const InvoiceBarsContainer = () => {
-  const { invoices } = useGlobalContext();
+  const { invoices, setInvoices } = useGlobalContext();
   const isEmpty = invoices?.results.length == 0;
+
+  useEffect(() => {
+    const params = { status: ["PAID", "PENDING", "DRAFT"] };
+    getAllInvoices(params).then((result) => {
+      setInvoices(result);
+    });
+  }, []);
+
   return (
     <section className="my-12 grid grid-cols-1 gap-6">
       {invoices?.results.map((invoice) => {
@@ -12,7 +22,7 @@ const InvoiceBarsContainer = () => {
       })}
 
       {isEmpty && (
-        <div className="flex flex-col items-center justify-center w-1/3 mx-auto mt-12 text-center">
+        <div className="flex flex-col items-center justify-center w-1/3 md:w-[90%] mx-auto mt-12 text-center">
           <img src={emptyIllustration} alt="" className="mb-12" />
           <p className="text-text_dark text-xl font-semibold">
             There is nothing here

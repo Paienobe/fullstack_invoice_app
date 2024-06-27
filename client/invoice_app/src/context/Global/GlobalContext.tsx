@@ -4,23 +4,30 @@ import {
   FormData,
   GlobalContextProps,
   GlobalContextType,
+  LoginResponse,
 } from "./types";
 import {
   Address,
   Invoice,
   InvoiceResponse,
 } from "../../services/api_response_types/invoice";
-import {
-  createInvoice,
-  getAllInvoices,
-  updateInvoice,
-} from "../../services/api/invoice";
+import { createInvoice, updateInvoice } from "../../services/api/invoice";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
-import { parseDataForNewInvoice } from "../../utils";
+import {
+  getUserDataCookie,
+  parseDataForNewInvoice,
+  setUserDataCookie,
+  updateBearerToken,
+} from "../../utils";
 import { toast } from "react-toastify";
+import { invoiceInstance } from "../../axios/instances";
+import { refreshToken } from "../../services/api/auth";
+import { useNavigate } from "react-router-dom";
+
 const GlobalContext = createContext({} as GlobalContextType);
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
+  const navigate = useNavigate();
   const [invoices, setInvoices] = useState<InvoiceResponse | null>(null);
   const [chosenFilter, setChosenFilter] = useState<Filters>({
     DRAFT: true,
@@ -31,12 +38,34 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   const [formData, setFormData] = useState(new InvoiceData());
   const [isEditMode, setIsEditMode] = useState(false);
   const [singleInvoice, setSingleInvoice] = useState<Invoice | null>(null);
+  const [loginResponse, setLoginResponse] = useState<LoginResponse | null>(
+    getUserDataCookie("user_data")
+  );
 
   useEffect(() => {
-    const params = { status: ["PAID", "PENDING", "DRAFT"] };
-    getAllInvoices(params).then((result) => {
-      setInvoices(result);
-    });
+    if (!loginResponse || !loginResponse.access) {
+      navigate("/login");
+    } else {
+      updateBearerToken(invoiceInstance, loginResponse.access);
+      setUserDataCookie("user_data", loginResponse);
+    }
+  }, [loginResponse]);
+
+  useEffect(() => {
+    const handleRefresh = () => {
+      refreshToken()
+        .then((result) => {
+          if (loginResponse) {
+            setLoginResponse({ ...loginResponse, access: result.access });
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            handleRefresh();
+          }, 1000 * 270 /*4.5 minutes*/);
+        });
+    };
+    handleRefresh();
   }, []);
 
   useEffect(() => {
@@ -117,6 +146,8 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
         updateTerms,
         handleSubmit,
         handleEdit,
+        loginResponse,
+        setLoginResponse,
       }}
     >
       {children}
