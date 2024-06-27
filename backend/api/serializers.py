@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Item, Address, Invoice, User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -98,3 +99,23 @@ class InvoiceSerializer(serializers.ModelSerializer):
         invoice = Invoice.objects.get(id=validated_data.get("id"))
         invoice.items.set(objs=updated_items)
         return invoice
+
+
+# JWT SERIALIZERS
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["name"] = user.name
+        token["email"] = user.email
+        return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data.update({
+            "user": {
+                "id": self.user.id,
+                "name": self.user.name,
+                "email": self.user.email
+            }
+        })
+        return data

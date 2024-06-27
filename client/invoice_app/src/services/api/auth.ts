@@ -22,6 +22,16 @@ export const loginUser = async (data: LoginData) => {
   }
 };
 
+export const refreshToken = async () => {
+  try {
+    const request = await authInstance.post("/token/refresh/");
+    return request.data;
+    // eslint-disable-next-line
+  } catch (error) {
+    catchAndThrowErr(error);
+  }
+};
+
 // eslint-disable-next-line
 const catchAndThrowErr = (error: any) => {
   const errorData = error.response.data;

@@ -11,11 +11,7 @@ import {
   Invoice,
   InvoiceResponse,
 } from "../../services/api_response_types/invoice";
-import {
-  createInvoice,
-  getAllInvoices,
-  updateInvoice,
-} from "../../services/api/invoice";
+import { createInvoice, updateInvoice } from "../../services/api/invoice";
 import { InvoiceData } from "../../components/InvoiceFormComponents/InvoiceForm/classes";
 import {
   getUserDataCookie,
@@ -25,10 +21,13 @@ import {
 } from "../../utils";
 import { toast } from "react-toastify";
 import { invoiceInstance } from "../../axios/instances";
+import { refreshToken } from "../../services/api/auth";
+import { useNavigate } from "react-router-dom";
 
 const GlobalContext = createContext({} as GlobalContextType);
 
 export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
+  const navigate = useNavigate();
   const [invoices, setInvoices] = useState<InvoiceResponse | null>(null);
   const [chosenFilter, setChosenFilter] = useState<Filters>({
     DRAFT: true,
@@ -44,6 +43,12 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   );
 
   useEffect(() => {
+    if (!loginResponse || !loginResponse.access) {
+      navigate("/login");
+    }
+  }, [loginResponse]);
+
+  useEffect(() => {
     if (loginResponse) {
       updateBearerToken(invoiceInstance, loginResponse.access);
       setUserDataCookie("user-data", loginResponse);
@@ -51,10 +56,22 @@ export const GlobalContextProvider = ({ children }: GlobalContextProps) => {
   }, [loginResponse]);
 
   useEffect(() => {
-    const params = { status: ["PAID", "PENDING", "DRAFT"] };
-    getAllInvoices(params).then((result) => {
-      setInvoices(result);
-    });
+    const handleRefresh = () => {
+      refreshToken()
+        .then((result) => {
+          if (loginResponse) {
+            setLoginResponse({ ...loginResponse, access: result.access });
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            handleRefresh();
+          }, 5000);
+        });
+    };
+    // if (loginResponse) {
+    handleRefresh();
+    // }
   }, []);
 
   useEffect(() => {
