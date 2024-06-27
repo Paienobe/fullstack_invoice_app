@@ -25,7 +25,7 @@ const StatusFilter = () => {
 
       {showOptions && (
         <div
-          className="clickable px-4 py-2 absolute bg-white w-[12rem] shadow-md rounded-lg top-10 right-[5%]"
+          className="clickable px-4 py-2 absolute bg-white dark:bg-secondary_dark w-[12rem] shadow-md rounded-lg top-10 right-[5%]"
           ref={optionsRef}
         >
           <FilterOption text="Draft" />
@@ -71,7 +71,7 @@ const FilterOption = ({ text }: FilterOptionProps) => {
 
   return (
     <button
-      className="flex items-center gap-4 my-2 text-text_dark  cursor-pointer group"
+      className="flex items-center gap-4 my-2 text-text_dark dark:text-white  cursor-pointer group"
       onClick={updatedFilter}
     >
       <div

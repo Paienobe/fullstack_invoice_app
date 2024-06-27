@@ -26,7 +26,7 @@ const DatePicker = ({ updateDate }: DatePickerProps) => {
   return (
     <div className="relative">
       <button
-        className="can_click h-[3.25rem] border border-light_border rounded-md w-full flex items-center justify-between p-4 text-text_dark"
+        className="can_click h-[3.25rem] border border-light_border dark:border-transparent rounded-md w-full flex items-center justify-between p-4 text-text_dark dark:text-white dark:bg-secondary_dark"
         type="button"
         onClick={() => {
           setShowCalendar(!showCalendar);
@@ -38,7 +38,7 @@ const DatePicker = ({ updateDate }: DatePickerProps) => {
       {showCalendar && (
         <div
           ref={calendarRef}
-          className="bg-white shadow-md absolute top-[-23rem]"
+          className="bg-white dark:bg-secondary_dark shadow-md absolute top-[-23rem]"
         >
           <DayPicker mode="single" selected={selected} onSelect={setSelected} />
         </div>

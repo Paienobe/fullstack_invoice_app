@@ -15,7 +15,7 @@ const InputField = ({
       </label>
       <input
         className={clsx(
-          "block border h-[3.25rem] text-text_dark p-4 border-light_border rounded-md mt-1 w-full focus:outline-purple"
+          "block border h-[3.25rem] text-text_dark p-4 border-light_border rounded-md mt-1 w-full focus:outline-purple dark:bg-secondary_dark dark:border-transparent dark:text-white"
         )}
         type={type ? type : "text"}
         value={value}

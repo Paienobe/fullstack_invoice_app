@@ -5,7 +5,7 @@ const BackButton = () => {
   const navigate = useNavigate();
   return (
     <button
-      className="flex items-center gap-4 text-text_dark"
+      className="flex items-center gap-4 text-text_dark dark:text-white"
       onClick={() => navigate(-1)}
     >
       <img src={leftArrow} alt="" />

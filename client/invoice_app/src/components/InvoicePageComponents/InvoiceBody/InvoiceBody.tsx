@@ -3,10 +3,10 @@ import { InvoiceBodyProps } from "./types";
 
 const InvoiceBody = ({ invoice }: InvoiceBodyProps) => {
   return (
-    <section className="px-[2.5rem] py-[3rem] bg-white rounded-lg shadow-sm font-light md:text-[0.875rem] md:px-[1.5rem]">
+    <section className="px-[2.5rem] py-[3rem] bg-white dark:bg-secondary_dark rounded-lg shadow-sm font-light md:text-[0.875rem] md:px-[1.5rem]">
       <section className="grid grid-cols-4 text-[0.938rem] gap-4">
         <div className="col-span-3 md:col-span-4">
-          <p className="text-text_dark text-[1.25rem] font-medium leading-5">
+          <p className="text-text_dark dark:text-white text-[1.25rem] font-medium leading-5">
             <span className="text-primary_text_color font-normal">#</span>
             {invoice.id}
           </p>
@@ -23,13 +23,13 @@ const InvoiceBody = ({ invoice }: InvoiceBodyProps) => {
         <div className="md:col-span-2">
           <div className="mb-8">
             <p>Invoice Date</p>
-            <p className="text-text_dark text-[1.25rem] font-medium my-2">
+            <p className="text-text_dark dark:text-white text-[1.25rem] font-medium my-2">
               {String(invoice.created_at)}
             </p>
           </div>
           <div>
             <p>Payment Due</p>
-            <p className="text-text_dark text-[1.25rem] font-medium my-2">
+            <p className="text-text_dark dark:text-white text-[1.25rem] font-medium my-2">
               {String(invoice.payment_due)}
             </p>
           </div>
@@ -37,7 +37,7 @@ const InvoiceBody = ({ invoice }: InvoiceBodyProps) => {
 
         <div className="md:col-span-2">
           <p>Bill To</p>
-          <p className="text-text_dark text-[1.25rem] font-medium my-2">
+          <p className="text-text_dark dark:text-white text-[1.25rem] font-medium my-2">
             {invoice.client_name}
           </p>
           <p>{invoice.client_address.street}</p>
@@ -48,7 +48,7 @@ const InvoiceBody = ({ invoice }: InvoiceBodyProps) => {
 
         <div>
           <p>Sent To</p>
-          <p className="text-text_dark text-[1.25rem] font-medium my-2">
+          <p className="text-text_dark dark:text-white text-[1.25rem] font-medium my-2">
             {invoice.client_email}
           </p>
         </div>

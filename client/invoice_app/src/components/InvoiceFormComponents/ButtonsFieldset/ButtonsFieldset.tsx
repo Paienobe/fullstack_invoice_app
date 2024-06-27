@@ -26,8 +26,8 @@ const ButtonsFieldset = () => {
           <div className="flex items-center gap-4 md:gap-2 md:w-[calc(100%/3*2)]">
             <Button
               text="Save as Draft"
-              bg_color="bg-secondary_light"
-              text_color="text-text_dark"
+              bg_color="bg-secondary_light dark:bg-secondary_dark"
+              text_color="text-text_dark dark:text-primary_text_color"
               className="md:w-[calc(100%/2)] md:px-0"
               type="submit"
               clickFunc={() => {
@@ -47,8 +47,8 @@ const ButtonsFieldset = () => {
         <div className="flex items-center gap-4 w-fit ml-auto">
           <Button
             text="Cancel"
-            bg_color="bg-secondary_light"
-            text_color="text-text_dark"
+            bg_color="bg-secondary_light dark:bg-secondary_dark"
+            text_color="text-text_dark dark:text-primary_text_color"
             clickFunc={discardForm}
           />
           <Button

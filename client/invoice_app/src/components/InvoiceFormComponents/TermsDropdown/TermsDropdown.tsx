@@ -17,7 +17,7 @@ const TermsDropdown = ({ updateTerms }: TermsDropdownProps) => {
     <div className="relative">
       <button
         type="button"
-        className="clickable border h-[3.25rem] p-4 border-light_border rounded-md w-full flex items-center justify-between text-text_dark"
+        className="clickable border h-[3.25rem] p-4 border-light_border dark:border-transparent rounded-md w-full flex items-center justify-between text-text_dark dark:text-white dark:bg-secondary_dark"
         onClick={() => setShowList(!showList)}
       >
         Net {selectedTerm} day{selectedTerm > 1 ? "s" : ""}{" "}
@@ -26,7 +26,7 @@ const TermsDropdown = ({ updateTerms }: TermsDropdownProps) => {
 
       {showList && (
         <div
-          className="absolute bg-white shadow-xl rounded-lg top-[4rem]"
+          className="absolute bg-white dark:bg-secondary_dark shadow-xl rounded-lg top-[4rem]"
           ref={dropdownRef}
         >
           {termOptions.map((option) => {
@@ -36,7 +36,7 @@ const TermsDropdown = ({ updateTerms }: TermsDropdownProps) => {
                 className={`w-full p-4 text-left border border-transparent border-b-purple last:border-b-transparent transition-colors duration-300 ${
                   selectedTerm == option
                     ? "text-purple"
-                    : "text-text_dark hover:text-primary_text_color"
+                    : "text-text_dark dark:text-white hover:text-primary_text_color"
                 }`}
                 onClick={() => {
                   setSelectedTerm(option);
