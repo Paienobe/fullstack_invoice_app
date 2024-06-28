@@ -16,7 +16,7 @@ const InvoiceForm = () => {
       transition={{ duration: 0.3 }}
     >
       <form
-        className="w-1/2 h-screen overflow-auto bg-white dark:bg-dark_bg lg:w-3/4 md:w-full"
+        className="w-1/2 h-screen overflow-auto bg-white dark:bg-dark_bg  xl:w-3/4 md:w-full"
         onSubmit={(e) => {
           e.preventDefault();
           !isEditMode ? handleSubmit() : handleEdit();

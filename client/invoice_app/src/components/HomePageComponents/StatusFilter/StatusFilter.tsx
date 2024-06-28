@@ -10,7 +10,7 @@ import { useIsMobile } from "../../../hooks/useIsMobile";
 const StatusFilter = () => {
   const optionsRef = useRef(null);
   const [showOptions, setShowOptions] = useState(false);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(600);
 
   useOutsideClick(optionsRef, setShowOptions, "clickable");
 

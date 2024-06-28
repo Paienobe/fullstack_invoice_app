@@ -5,10 +5,11 @@ import AuthPageContainer from "../../components/Layout/AuthPageContainer/AuthPag
 import Button from "../../components/UI/Button/Button";
 import InputField from "../../components/UI/InputField/InputField";
 import { LoginData } from "./types";
-import { loginUser } from "../../services/api/auth";
+import { loginUser, registerUser } from "../../services/api/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/Global/GlobalContext";
+import { v4 as uuid } from "uuid";
 
 const LoginPage = () => {
   const { setLoginResponse } = useGlobalContext();
@@ -18,7 +19,7 @@ const LoginPage = () => {
     setLoginData({ ...loginData, [key]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (loginData: LoginData) => {
     loginUser(loginData)
       .then((result) => {
         setLoginResponse(result);
@@ -28,13 +29,29 @@ const LoginPage = () => {
         toast.error(err.message);
       });
   };
+
+  const createGuestAccount = () => {
+    const guestUser = {
+      name: `guest-${uuid()}`,
+      email: `guest-${uuid()}@mail.com`,
+      password: uuid(),
+    };
+    registerUser(guestUser).then(() => {
+      const loginDetails = {
+        email: guestUser.email,
+        password: guestUser.password,
+      };
+      handleSubmit(loginDetails);
+    });
+  };
+
   return (
     <AuthPageContainer>
       <form
         className="w-[45%] lg:w-[70%] md:w-[90%] p-8 rounded-lg bg-white dark:bg-dark_bg mx-auto"
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
+          handleSubmit(loginData);
         }}
       >
         <AuthFormHeader />
@@ -58,6 +75,14 @@ const LoginPage = () => {
           text_color="text-white"
           className="w-full mt-8"
           type="submit"
+        />
+        <Button
+          bg_color="bg-purple"
+          text="Log in as guest"
+          text_color="text-white"
+          className="w-full mt-4"
+          type="button"
+          clickFunc={createGuestAccount}
         />
 
         <AuthFormFooter

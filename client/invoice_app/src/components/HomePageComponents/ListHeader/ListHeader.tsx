@@ -8,7 +8,7 @@ import { useIsMobile } from "../../../hooks/useIsMobile";
 const ListHeader = () => {
   const { invoices, setShowForm, setFormData } = useGlobalContext();
   const invoiceCount = invoices?.count;
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(600);
   return (
     <section className="flex item-center justify-between">
       <div>
