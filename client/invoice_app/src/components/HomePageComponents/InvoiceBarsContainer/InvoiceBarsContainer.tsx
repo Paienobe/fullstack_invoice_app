@@ -2,7 +2,8 @@ import { useGlobalContext } from "../../../context/Global/GlobalContext";
 import InvoiceBar from "../InvoiceBar/InvoiceBar";
 import emptyIllustration from "../../../assets/illustration-empty.svg";
 import { useEffect } from "react";
-import { getAllInvoices } from "../../../services/api/invoice";
+import { getAllInvoices, getNextInvoices } from "../../../services/api/invoice";
+import Button from "../../UI/Button/Button";
 
 const InvoiceBarsContainer = () => {
   const { invoices, setInvoices } = useGlobalContext();
@@ -15,11 +16,31 @@ const InvoiceBarsContainer = () => {
     });
   }, []);
 
+  const fetchMoreInvoices = () => {
+    if (invoices?.next) {
+      getNextInvoices(invoices.next).then((response) => {
+        setInvoices({
+          ...response,
+          results: [...invoices.results, ...response.results],
+        });
+      });
+    }
+  };
+
   return (
     <section className="my-12 grid grid-cols-1 gap-6">
       {invoices?.results.map((invoice) => {
         return <InvoiceBar key={invoice.id} invoice={invoice} />;
       })}
+
+      {invoices?.next && (
+        <Button
+          text="Show more"
+          bg_color="bg-purple"
+          text_color="text-white"
+          clickFunc={fetchMoreInvoices}
+        />
+      )}
 
       {isEmpty && (
         <div className="flex flex-col items-center justify-center w-1/3 md:w-[90%] mx-auto mt-12 text-center">
