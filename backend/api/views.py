@@ -6,6 +6,14 @@ from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+
+class IndexView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return Response({"message": "We're up and running"}, status=status.HTTP_200_OK)
 
 
 class RegistrationView(generics.CreateAPIView):

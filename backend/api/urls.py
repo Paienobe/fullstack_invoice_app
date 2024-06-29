@@ -4,6 +4,8 @@ from . import views
 
 
 urlpatterns = [
+    path("", views.IndexView.as_view()),
+
     path("auth/register/", views.RegistrationView.as_view()),
     path("auth/login/", views.CustomTokenObtainPairView.as_view()),
     path("auth/token/refresh/", views.CustomTokenRefreshView.as_view()),
