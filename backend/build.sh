@@ -9,4 +9,5 @@ pip install -r requirements.txt
 python manage.py collectstatic --no-input
 
 # You can add any other deployment steps here (e.g., database migrations)
+python manage.py makemigrations
 python manage.py migrate
