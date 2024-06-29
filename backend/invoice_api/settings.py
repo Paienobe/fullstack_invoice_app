@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import dj_database_url
 
 load_dotenv()
 
@@ -93,14 +94,11 @@ DATABASES = {
 }
 
 if os.getenv("ENV") == "production":
-    DATABASES["default"] = {
-        "ENGINE": os.getenv("DB_ENGINE"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("USER"),
-        "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": os.getenv("HOST"),
-        "PORT": os.getenv("PORT")
-    }
+    DATABASES["default"] = dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default=os.getenv("DB_CONN_STR"),
+        conn_max_age=600
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
