@@ -99,6 +99,7 @@ if os.getenv("ENV") == "production":
         default=os.getenv("DB_CONN_STR"),
         conn_max_age=600
     )
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
