@@ -9,9 +9,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./pages/Login/LoginPage";
 import SignUp from "./pages/SignUp/SignUp";
+import { useScreenFreeze } from "./hooks/useScreenFreeze";
 
 function App() {
   const { showForm } = useGlobalContext();
+  useScreenFreeze(showForm);
   return (
     <main className="bg-light_bg dark:bg-dark_bg text-primary_text_color min-h-screen font-Spartan">
       <Header />

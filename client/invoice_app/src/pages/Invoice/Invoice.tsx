@@ -12,6 +12,7 @@ import {
   useInvoicePageContext,
 } from "../../context/Invoice/InvoicePageContext";
 import InvoiceOptions from "../../components/InvoicePageComponents/InvoiceOptions/InvoiceOptions";
+import { useScreenFreeze } from "../../hooks/useScreenFreeze";
 
 const Invoice = () => {
   return (
@@ -48,6 +49,7 @@ const InvoicePageMain = () => {
   };
 
   const toggleModal = () => setShowDeleteModal(!showDeleteModal);
+  useScreenFreeze(showDeleteModal);
   return (
     <PageMainArea>
       {singleInvoice && (
