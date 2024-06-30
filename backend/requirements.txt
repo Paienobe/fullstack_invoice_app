@@ -6,3 +6,4 @@ gunicorn
 python-dotenv
 psycopg2
 dj-database-url
+requests
