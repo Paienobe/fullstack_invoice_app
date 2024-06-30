@@ -7,6 +7,8 @@ from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .constants import DUMMY_INVOICES
+import requests
 
 
 class IndexView(APIView):
@@ -78,7 +80,19 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             path="/"
         )
         del data["refresh"]
+        username = str(data.get("user").get("name"))
+        access_token = str(data.get("access"))
+        is_guest = username.startswith("guest-")
+        if (is_guest):
+            self.create_dummy_data(access_token)
         return response
+
+    def create_dummy_data(self, token):
+        request = self.request
+        create_endpoint = request.build_absolute_uri('/api/invoice/')
+        for invoice in DUMMY_INVOICES:
+            requests.post(create_endpoint, json=invoice,
+                          headers={"Authorization": f"Bearer {token}"})
 
 
 class CustomTokenRefreshView(TokenRefreshView):
