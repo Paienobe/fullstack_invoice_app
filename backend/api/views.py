@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .constants import DUMMY_INVOICES
 import requests
+from .tasks import delete_old_guest_accounts
 
 
 class IndexView(APIView):
@@ -32,6 +33,9 @@ class InvoiceListCreateView(generics.ListCreateAPIView):
         params_dict = dict(self.request.query_params)
         status_params = params_dict.get("status")
         filtered_invoices = Invoice.objects.none()
+        # background_task for deleting old guest_accounts
+        delete_old_guest_accounts()
+        # end of task
         if status_params is None:
             return filtered_invoices
         for param in status_params:
