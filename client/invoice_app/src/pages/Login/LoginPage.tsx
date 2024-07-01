@@ -24,6 +24,9 @@ const LoginPage = () => {
       .then((result) => {
         setLoginResponse(result);
         navigate("/");
+        toast.success(
+          "Welcome!! Guest accounts are automatically deleted after 3 days"
+        );
       })
       .catch((err) => {
         toast.error(err.message);
