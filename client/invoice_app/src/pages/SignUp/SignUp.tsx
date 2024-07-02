@@ -36,7 +36,7 @@ const SignUp = () => {
   return (
     <AuthPageContainer>
       <form
-        className="w-[45%] lg:w-[70%] md:w-[90%] p-8 rounded-lg bg-white mx-auto"
+        className="w-[45%] lg:w-[70%] md:w-[90%] p-8 rounded-lg bg-white dark:bg-dark_bg mx-auto"
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
